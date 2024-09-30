@@ -10,15 +10,14 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="442dp"
-        android:layout_height="308dp"
+        android:layout_width="397dp"
+        android:layout_height="297dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
-        android:layout_marginBottom="500dp"
+        android:layout_marginBottom="452dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rectangle" />
 
@@ -96,13 +95,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/montserrat"
         android:text="Categories"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
@@ -188,23 +187,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/montserrat"
         android:text="Quick And Easy"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/CardView1"
-        android:layout_width="366dp"
-        android:layout_height="151dp"
+        android:layout_width="350dp"
+        android:layout_height="140dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
@@ -252,11 +251,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/CardView2"
-        android:layout_width="366dp"
-        android:layout_height="151dp"
+        android:layout_width="350dp"
+        android:layout_height="140dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="20dp"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -269,6 +268,7 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/shrimpsalad1" />
+
         <TextView
             android:id="@+id/videoDuration2"
             android:layout_width="80dp"
@@ -313,7 +313,7 @@
         app:itemTextColor="#ffff11"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CardView2Text"
         app:menu="@menu/menu" />
