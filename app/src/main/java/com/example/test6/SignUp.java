@@ -24,7 +24,6 @@ import com.google.firebase.firestore.auth.User;
 public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText SignUpEmail, SignUpPassword, SignUpUsername, UserName;
-    private Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class SignUp extends AppCompatActivity {
         SignUpEmail = findViewById(R.id.signup_email);
         SignUpPassword = findViewById(R.id.sign_up_password);
         UserName = findViewById(R.id.sign_up_username);
-        registerBtn = findViewById(R.id.regButton);
+        Button registerBtn = findViewById(R.id.regButton);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +59,10 @@ public class SignUp extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-//                                Toast.makeText(SignUp.this, "user created", Toast.LENGTH_SHORT).show();
-//                                -
+                                Toast.makeText(SignUp.this, "user created", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignUp.this, Home.class));
+                            } else {
+                                Toast.makeText(SignUp.this, "Signup error "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

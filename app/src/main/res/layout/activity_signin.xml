@@ -20,14 +20,14 @@
         app:srcCompat="@drawable/logowhite" />
 
     <EditText
-        android:id="@+id/usernametxt"
+        android:id="@+id/sign_in_email"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_marginTop="72dp"
         android:background="@drawable/roundcorner"
         android:ems="10"
         android:fontFamily="@font/rambla"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="text"
         android:padding="5dp"
         android:paddingStart="20dp"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logowhite" />
 
     <EditText
-        android:id="@+id/passwordtxt"
+        android:id="@+id/sign_in_password"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:background="@drawable/roundcorner"
@@ -54,7 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernametxt"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_email"
         app:layout_constraintVertical_bias="0.053" />
 
     <TextView
@@ -68,12 +68,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.882"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordtxt"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_password"
         app:layout_constraintVertical_bias="0.0" />
 
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/sign_in_login"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_marginBottom="4dp"
