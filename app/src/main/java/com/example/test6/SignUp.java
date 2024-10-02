@@ -19,11 +19,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.auth.User;
 
 public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private EditText SignUpEmail, SignUpPassword, SignUpUsername, UserName;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    private EditText SignUpEmail, SignUpPassword, UserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,9 @@ public class SignUp extends AppCompatActivity {
                 String password = SignUpPassword.getText().toString().trim();
                 String username = UserName.getText().toString().trim();
 
+                database = FirebaseDatabase.getInstance();
+                reference = database.getReference("users");
+
                 if(email.isEmpty()){
                     SignUpEmail.setError("Email cannot be empty");
                 }
@@ -55,6 +62,8 @@ public class SignUp extends AppCompatActivity {
                     UserName.setError("Username cannot be empty");
                 }
                 else{
+                    HelperClass helperClass = new HelperClass(username, email, password);
+                    reference.child(username).setValue(helperClass);
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
