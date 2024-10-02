@@ -7,194 +7,168 @@
     android:layout_height="match_parent"
     tools:context=".AddRecipe">
 
-    <ImageView
-        android:id="@+id/BackBtnAddRecipe"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.074"
-        app:srcCompat="@drawable/back"
-        android:onClick="GoBackToMyRecipe"/>
+    <!-- Recipe Add Title -->
+
+    <!-- Back Button -->
 
     <TextView
         android:id="@+id/RecipeAddText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="96dp"
         android:fontFamily="@font/montserrat"
         android:text="Add Recipe"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/BackBtnAddRecipe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toEndOf="@+id/BackBtnAddRecipe"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintVertical_bias="0.714" />
+
+    <ImageView
+        android:id="@+id/BackBtnAddRecipe"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:onClick="GoBackToMyRecipe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <!-- Enter Recipe Name Text -->
 
     <TextView
-        android:id="@+id/textView15"
-        android:layout_width="188dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/addRecipe_enterNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:fontFamily="@font/montserrat"
         android:text="Enter Recipe Name"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BackBtnAddRecipe" />
+        app:layout_constraintTop_toBottomOf="@+id/RecipeAddText" />
+
+    <!-- Recipe Name Input -->
 
     <EditText
         android:id="@+id/editTextText5"
-        android:layout_width="335dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="345dp"
+        android:layout_height="48dp"
         android:background="@drawable/roundcorner"
-        android:ems="10"
-        android:hint="      Name"
+        android:hint="Name"
+        android:paddingStart="20dp"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/addRecipe_enterNameText"
+        android:layout_marginTop="8dp"/>
 
+    <!-- Ingredients Label -->
+
+    <!-- Ingredients Input -->
     <TextView
         android:id="@+id/IngredientText"
-        android:layout_width="224dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
         android:text="Add ingredients one by one"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintHorizontal_bias="0.27"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
 
     <EditText
-        android:id="@+id/ingredient1"
-        android:layout_width="333dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/ingredientTextAdd"
+        android:layout_width="345dp"
+        android:layout_height="100dp"
         android:background="@drawable/roundcorner"
-        android:ems="10"
-        android:hint="      Ingredient"
-        android:inputType="text"
+        android:gravity="start|top"
+        android:hint="Add ingredients here"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IngredientText" />
+        app:layout_constraintTop_toBottomOf="@+id/IngredientText"
+        android:layout_marginTop="8dp"/>
 
-    <EditText
-        android:id="@+id/ingredient2"
-        android:layout_width="335dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/roundcorner"
-        android:ems="10"
-        android:hint="      Ingredient"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredient1" />
+    <!-- Method Label -->
 
-    <ImageView
-        android:id="@+id/PlusForAddIngredient"
-        android:layout_width="41dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredient2"
-        app:srcCompat="@drawable/plus" />
-
-    <View
-        android:id="@+id/line4"
-        android:layout_width="360dp"
-        android:layout_height="0.8dp"
-        android:layout_marginTop="12dp"
-        android:background="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PlusForAddIngredient" />
-
+    <!-- Method Input -->
     <TextView
         android:id="@+id/MethodText"
-        android:layout_width="224dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
         android:text="Write the method"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
+        app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line4" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredientTextAdd" />
 
     <EditText
-        android:id="@+id/MethodTextAdd"
-        android:layout_width="335dp"
+        android:id="@+id/methodAdd"
+        android:layout_width="345dp"
         android:layout_height="100dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/roundcorner"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="      Add method here"
-        android:inputType="text"
-        android:paddingTop="20dp"
+        android:gravity="start|top"
+        android:hint="Add method here"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MethodText" />
+        app:layout_constraintTop_toBottomOf="@+id/MethodText"
+        android:layout_marginTop="8dp"/>
 
-    <View
-        android:id="@+id/line5"
-        android:layout_width="360dp"
-        android:layout_height="0.8dp"
-        android:layout_marginTop="8dp"
-        android:background="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MethodTextAdd" />
+    <!-- Preparation Time Label -->
 
+    <!-- Preparation Time Input -->
     <TextView
         android:id="@+id/AddPreparationTimeText"
-        android:layout_width="224dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
         android:text="Add Preparation Time"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.208"
+        app:layout_constraintHorizontal_bias="0.227"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line5" />
+        app:layout_constraintTop_toBottomOf="@+id/methodAdd" />
 
     <EditText
         android:id="@+id/AddPreparationTime"
-        android:layout_width="335dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="308dp"
+        android:layout_width="345dp"
+        android:layout_height="48dp"
         android:background="@drawable/roundcorner"
-        android:ems="10"
-        android:hint="      Time"
+        android:hint="Time"
+        android:paddingStart="20dp"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredient1" />
+        app:layout_constraintTop_toBottomOf="@+id/AddPreparationTimeText"
+        android:layout_marginTop="8dp"/>
 
+    <!-- Image Upload Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/CardViewForUpload"
         android:layout_width="230dp"
@@ -222,6 +196,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:src="@drawable/salad" />
+
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -233,34 +208,34 @@
             android:text="Upload Your Image" />
     </androidx.cardview.widget.CardView>
 
-
+    <!-- Add and Cancel Buttons -->
     <Button
         android:id="@+id/AddBtn"
-        android:layout_width="100dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
         android:backgroundTint="#000053"
         android:text="Add"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CardViewForUpload" />
+        app:layout_constraintEnd_toStartOf="@+id/cancel"
+        app:layout_constraintTop_toBottomOf="@+id/CardViewForUpload"
+        android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/cancel"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
         android:backgroundTint="#FCFCFF"
         android:onClick="GoBackToMyRecipe"
         android:text="Cancel"
         android:textColor="#000053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CardViewForUpload"
         app:strokeColor="#000053"
-        app:strokeWidth="10px" />
+        app:strokeWidth="2dp"
+        app:layout_constraintStart_toEndOf="@+id/AddBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CardViewForUpload"
+        android:layout_marginTop="16dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
