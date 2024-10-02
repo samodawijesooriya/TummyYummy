@@ -8,48 +8,43 @@
     tools:context=".ProfilePictureAdd">
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
-        android:onClick="GoToProfileSettings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
+        android:id="@+id/change_name_backbutton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:onClick="GoToUserProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.074"
         app:srcCompat="@drawable/back" />
 
     <TextView
-        android:id="@+id/ProfileAddText"
+        android:id="@+id/profile_picture_add_ProfileAddText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
         android:fontFamily="@font/montserrat"
         android:text="Profile Picture"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.212"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
+        android:id="@+id/profile_picture_add_materialCardView"
         android:layout_width="316dp"
         android:layout_height="210dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="108dp"
         android:background="@drawable/roundcorner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProfileAddText">
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture_add_ProfileAddText">
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/profile_picture_add_imageView9"
             android:layout_width="318dp"
             android:layout_height="191dp"
             android:layout_marginTop="10dp"
@@ -57,20 +52,18 @@
     </com.google.android.material.card.MaterialCardView>
 
     <Button
-        android:id="@+id/BtnChangeNumber"
+        android:id="@+id/profile_picture_add_BtnChangeNumber"
         android:layout_width="114dp"
         android:layout_height="55dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="92dp"
         android:fontFamily="@font/montserrat"
         android:text="Save"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture_add_materialCardView"
+        tools:layout_editor_absoluteX="139dp" />
 
     <TextView
-        android:id="@+id/descriptionText"
+        android:id="@+id/profile_picture_add_descriptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -79,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.279"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProfileAddText" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture_add_ProfileAddText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
