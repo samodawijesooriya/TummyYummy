@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/history_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".History">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/history_textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/rambla"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.067" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/history_searchView"
         android:layout_width="340dp"
         android:layout_height="45dp"
         android:background="@drawable/roundcorner"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/history_textView8"
         app:layout_constraintVertical_bias="0.014"
         app:queryHint="Search History" />
 
@@ -42,10 +42,10 @@
         android:layout_height="570dp"
         android:layout_marginBottom="32dp"
         android:fillViewport="true"
-        android:id="@+id/ScrollerView1"
+        android:id="@+id/history_ScrollerView1"
         android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintTop_toBottomOf="@+id/history_searchView"
+        app:layout_constraintBottom_toTopOf="@+id/history_bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -65,21 +65,21 @@
                 android:paddingBottom="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView1"
+                    android:id="@+id/history_cardView1"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/desserts1"
+                        android:id="@+id/history_desserts1"
                         android:layout_width="344dp"
                         android:layout_height="179dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/milkrice1" />
 
                     <TextView
-                        android:id="@+id/videoDuration1"
+                        android:id="@+id/history_videoDuration1"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -121,21 +121,21 @@
                 android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
+                    android:id="@+id/history_cardView2"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/desserts2"
+                        android:id="@+id/history_desserts2"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/applepie1" />
 
                     <TextView
-                        android:id="@+id/videoDuration2"
+                        android:id="@+id/history_videoDuration2"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -177,21 +177,21 @@
                 android:paddingBottom="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView4"
+                    android:id="@+id/history_cardView4"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/plumPudding"
+                        android:id="@+id/history_plumPudding"
                         android:layout_width="344dp"
                         android:layout_height="179dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/plum_pudding1" />
 
                     <TextView
-                        android:id="@+id/videoDuration4"
+                        android:id="@+id/history_videoDuration4"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -233,21 +233,21 @@
                 android:paddingBottom="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView3"
+                    android:id="@+id/history_cardView3"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/desserts3"
+                        android:id="@+id/history_desserts3"
                         android:layout_width="344dp"
                         android:layout_height="179dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/tacos" />
 
                     <TextView
-                        android:id="@+id/videoDuration3"
+                        android:id="@+id/history_videoDuration3"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -286,18 +286,19 @@
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/history_bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/bottom_background"
         android:elevation="2dp"
         app:itemIconSize="30dp"
         app:itemIconTint="#FFFFFF"
         app:itemTextColor="#ffff11"
         app:labelVisibilityMode="unlabeled"
-        app:layout_constraintTop_toBottomOf="@+id/ScrollerView1"
-        app:menu="@menu/menu" />
+        app:layout_constraintTop_toBottomOf="@+id/history_ScrollerView1"
+        app:menu="@menu/menu"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
