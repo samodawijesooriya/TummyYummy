@@ -27,7 +27,6 @@ import java.util.Objects;
 public class ProfileSettings extends AppCompatActivity {
 
     protected FirebaseAuth mAuth;
-    protected FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +39,9 @@ public class ProfileSettings extends AppCompatActivity {
             return insets;
         });
 
-        TextView deleteAcc = findViewById(R.id.profileSettings_deleteUser);
         Button logoutBtn = findViewById(R.id.profileSettings_logout);
 
         mAuth = FirebaseAuth.getInstance();
-        firebaseUser = mAuth.getCurrentUser();
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,50 +51,6 @@ public class ProfileSettings extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 Toast.makeText(ProfileSettings.this, "Logout Successful", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        deleteAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(ProfileSettings.this);
-                dialog.setTitle("Are you sure?");
-                dialog.setMessage("Deleting this account will result in completely removing your "+
-                        "account from the system and you won't be able to access the app.");
-                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        AlertDialog progressDialog = new AlertDialog.Builder(ProfileSettings.this)
-                                .setView(R.layout.dialog_progress) // Use the custom layout
-                                .setCancelable(false) // Prevent cancellation
-                                .create();
-
-                        progressDialog.show();
-
-                        firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                progressDialog.dismiss();
-                                if(task.isSuccessful()){
-                                    Toast.makeText(ProfileSettings.this, "Account Deleted", Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(ProfileSettings.this, MainActivity.class);
-                                    startActivity(intent);
-                                }else{
-                                    Toast.makeText(ProfileSettings.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
-                    }
-                });
-                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.show();
             }
         });
     }
@@ -124,5 +77,9 @@ public class ProfileSettings extends AppCompatActivity {
 
     public void GoToTheAddProfilePicture(View view) {
         startActivity(new Intent(this, ProfilePictureAdd.class));
+    }
+
+    public void GoToDeleteAcc(View view) {
+        startActivity(new Intent(this, DeleteAccount.class));
     }
 }

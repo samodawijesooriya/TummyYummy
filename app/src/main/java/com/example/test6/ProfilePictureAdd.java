@@ -25,6 +25,6 @@ public class ProfilePictureAdd extends AppCompatActivity {
     }
 
     public void GoToProfileSettings(View view) {
-        startActivity(new Intent(this, UserHome.class));
+        startActivity(new Intent(this, ProfileSettings.class));
     }
 }

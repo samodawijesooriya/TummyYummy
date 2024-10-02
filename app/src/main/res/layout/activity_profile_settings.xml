@@ -276,5 +276,6 @@
         android:fontFamily="@font/montserrat"
         android:backgroundTint="#000053"
         android:text="Delete User"
+        android:onClick="GoToDeleteAcc"
         android:textSize="18sp" />
 </RelativeLayout>

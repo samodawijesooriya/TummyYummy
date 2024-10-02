@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/backImage" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/deleteAccount_delete"
         android:layout_width="234dp"
         android:layout_height="61dp"
         android:layout_marginBottom="244dp"
@@ -70,7 +70,7 @@
         android:layout_width="223dp"
         android:layout_height="135dp"
         android:layout_marginBottom="156dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/deleteAccount_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,11 +80,13 @@
         android:id="@+id/textView14"
         android:layout_width="135dp"
         android:layout_height="26dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="284dp"
         android:fontFamily="@font/montserrat"
         android:text="It's mathee"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="277dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

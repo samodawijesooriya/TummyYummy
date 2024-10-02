@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_fogot"
+    android:layout_margin="20dp"
+    android:padding="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialogBox"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/roundcorner">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fogotTitle"
+            android:background="@drawable/roundcorner2"
+            android:padding="10dp"
+            android:text="Foget Password"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialogFogot_desc"
+            android:text="Enter your email address"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="#000053"
+            app:layout_constraintTop_toBottomOf="@+id/fogotTitle"/>
+        
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialogFogot_emailBox"
+            android:textColor="#000053"
+            android:textSize="16sp"
+            android:layout_marginStart="20sp"
+            android:backgroundTint="#000012"
+            android:layout_marginBottom="30dp"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fogotTitle"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/dialogFogot_btnCancel"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:text="Cancel"
+            android:background="@drawable/roundcorner2"
+            app:layout_constraintTop_toBottomOf="@id/dialogFogot_emailBox"
+            app:layout_constraintBottom_toBottomOf="@id/dialogBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/dialogFogot_btnReset"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/dialogFogot_btnReset"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:text="Reset"
+            android:background="@drawable/roundcorner2"
+            app:layout_constraintBottom_toBottomOf="@id/dialogBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dialogFogot_btnCancel"
+            />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
