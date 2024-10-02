@@ -3,16 +3,29 @@ package com.example.test6;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserHome extends AppCompatActivity {
+
+    protected FirebaseAuth mAuth;
+    private DatabaseReference reference;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +37,30 @@ public class UserHome extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        mAuth = FirebaseAuth.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference("users");
+        userId = mAuth.getCurrentUser().getUid();
+        TextView usernameText = findViewById(R.id.UserNameShow);
+
+        reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                HelperClass userProfile = dataSnapshot.getValue(HelperClass.class);
+
+                if(userProfile != null){
+                    String user = userProfile.username;
+
+                    usernameText.setText(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(UserHome.this,"", Toast.LENGTH_LONG).show();
+            }
+        });
+
         // Bottom navigation code
         // Start here
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

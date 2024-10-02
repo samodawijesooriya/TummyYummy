@@ -62,14 +62,27 @@ public class SignUp extends AppCompatActivity {
                     UserName.setError("Username cannot be empty");
                 }
                 else{
-                    HelperClass helperClass = new HelperClass(username, email, password);
-                    reference.child(username).setValue(helperClass);
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(SignUp.this, "user created", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignUp.this, Home.class));
+
+                                String userId = mAuth.getCurrentUser().getUid();
+
+                                HelperClass helperClass = new HelperClass(username, email, password);
+
+                                reference.child(userId).setValue(helperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(SignUp.this, "user created", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(SignUp.this, Home.class));
+                                            finish();
+                                        }else{
+                                            Toast.makeText(SignUp.this, "Database error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             } else {
                                 Toast.makeText(SignUp.this, "Signup error "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }

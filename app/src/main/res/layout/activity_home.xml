@@ -66,14 +66,14 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/home_username"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="Hi It's mathee!"
+        android:text="Hi!"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -142,7 +142,7 @@
                 android:fontFamily="@font/montserrat"
                 android:text="All"
                 android:textColor="#FCFCFF"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/dessetBtn"
