@@ -8,7 +8,7 @@
     tools:context=".Favourites">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/favourites_textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -23,8 +23,8 @@
         app:layout_constraintVertical_bias="0.067" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="340dp"
+        android:id="@+id/favourites_searchView"
+        android:layout_width="345dp"
         android:layout_height="45dp"
         android:background="@drawable/roundcorner"
         android:textColor="#B3000000"
@@ -37,14 +37,14 @@
         app:layout_constraintVertical_bias="0.142" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/favourites_scrollView2"
         android:layout_width="415dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView">
+        app:layout_constraintTop_toBottomOf="@+id/favourites_searchView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,21 +62,21 @@
                 android:paddingBottom="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView1"
+                    android:id="@+id/favourites_cardView1"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/desserts1"
+                        android:id="@+id/favourites_desserts1"
                         android:layout_width="344dp"
                         android:layout_height="179dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/raspberry_jam" />
 
                     <TextView
-                        android:id="@+id/videoDuration1"
+                        android:id="@+id/favourites_videoDuration1"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -108,21 +108,21 @@
                 android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
+                    android:id="@+id/favourites_cardView2"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/desserts2"
+                        android:id="@+id/favourites_desserts2"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/shrimpsalad1" />
 
                     <TextView
-                        android:id="@+id/videoDuration2"
+                        android:id="@+id/favourites_videoDuration2"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -151,11 +151,11 @@
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/favourites_bottomNavigationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/bottom_background"
         android:elevation="2dp"
         app:itemIconSize="30dp"
@@ -165,6 +165,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/favourites_scrollView2"
         app:menu="@menu/menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
