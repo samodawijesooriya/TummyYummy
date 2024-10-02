@@ -8,13 +8,13 @@
     tools:context=".Desserts">
 
     <ImageView
-        android:id="@+id/backBtn"
+        android:id="@+id/desserts_backBtn"
         android:layout_width="35dp"
         android:layout_height="45dp"
         android:layout_marginStart="36dp"
         android:onClick="GoHomeFromDessert"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintEnd_toStartOf="@+id/desserts_textView8"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/back" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/desserts_textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -38,8 +38,8 @@
         app:layout_constraintVertical_bias="0.048" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="363dp"
+        android:id="@+id/desserts_searchView"
+        android:layout_width="345dp"
         android:layout_height="45dp"
         android:background="@drawable/roundcorner"
         android:textColor="#B3000000"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/desserts_searchView"
         app:layout_constraintVertical_bias="0.662">
 
         <LinearLayout
@@ -78,21 +78,22 @@
                 android:paddingBottom="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView1"
+                    android:id="@+id/desserts_cardView1"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/desserts1"
+                        android:id="@+id/desserts_desserts1"
                         android:layout_width="344dp"
                         android:layout_height="179dp"
-                        android:scaleType="centerCrop"
                         android:onClick="GoToRecipeView"
+                        android:scaleType="centerCrop"
                         app:srcCompat="@drawable/raspberry_jam" />
+
                     <TextView
-                        android:id="@+id/videoDuration1"
+                        android:id="@+id/desserts_videoDuration1"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -123,20 +124,21 @@
                 android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
+                    android:id="@+id/desserts_cardView2"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/desserts2"
+                        android:id="@+id/desserts_desserts2"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/brownies" />
+
                     <TextView
-                        android:id="@+id/videoDuration01"
+                        android:id="@+id/desserts_videoDuration01"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -167,21 +169,21 @@
                 android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView3"
+                    android:id="@+id/desserts_cardView3"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/desserts3"
+                        android:id="@+id/desserts_desserts3"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/cheese_cake" />
 
                     <TextView
-                        android:id="@+id/videoDuration02"
+                        android:id="@+id/desserts_videoDuration02"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
@@ -212,7 +214,7 @@
                 android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView4"
+                    android:id="@+id/desserts_cardView4"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -225,7 +227,7 @@
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/watalappan" />
                     <TextView
-                        android:id="@+id/videoDuration03"
+                        android:id="@+id/desserts_videoDuration03"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
