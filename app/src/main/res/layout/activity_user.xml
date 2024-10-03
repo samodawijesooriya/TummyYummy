@@ -8,7 +8,7 @@
     tools:context=".UserHome">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/user_profileImage"
         android:layout_width="264dp"
         android:layout_height="279dp"
         android:layout_alignParentStart="true"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/user_profileImage" />
 
     <Button
         android:id="@+id/helpSupport"
