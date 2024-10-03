@@ -9,36 +9,34 @@
 
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
-        android:onClick="backToSignUp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
+        android:id="@+id/contact_us_backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:onClick="GoToUserProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.051"
         app:srcCompat="@drawable/back" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/contact_us_Topic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
         android:text="Contact Us"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/fullNameText"
+        android:id="@+id/contact_us_fullNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -46,27 +44,27 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.183" />
+        app:layout_constraintVertical_bias="0.148" />
 
     <EditText
-        android:id="@+id/fullNameEditText"
-        android:layout_width="350dp"
+        android:id="@+id/contact_us_fullNameEditText"
+        android:layout_width="345dp"
         android:layout_height="50dp"
         android:background="@drawable/roundcorner"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.245" />
+        app:layout_constraintVertical_bias="0.209" />
 
     <TextView
-        android:id="@+id/EmailText"
+        android:id="@+id/contact_us_EmailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -74,27 +72,27 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324" />
+        app:layout_constraintVertical_bias="0.301" />
 
     <EditText
-        android:id="@+id/emailEditText"
-        android:layout_width="350dp"
+        android:id="@+id/contact_us_emailEditText"
+        android:layout_width="345dp"
         android:layout_height="50dp"
         android:background="@drawable/roundcorner"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.385" />
+        app:layout_constraintVertical_bias="0.367" />
 
     <TextView
-        android:id="@+id/messageText"
+        android:id="@+id/contact_us_messageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
@@ -102,14 +100,14 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.476" />
+        app:layout_constraintVertical_bias="0.452" />
 
     <EditText
-        android:id="@+id/messageEditText"
-        android:layout_width="350dp"
+        android:id="@+id/contact_us_messageEditText"
+        android:layout_width="345dp"
         android:layout_height="200dp"
         android:background="@drawable/roundcorner"
         android:ems="10"
@@ -122,7 +120,7 @@
         app:layout_constraintVertical_bias="0.651" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/contact_us_button3"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:backgroundTint="#000053"

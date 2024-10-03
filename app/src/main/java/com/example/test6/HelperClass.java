@@ -5,6 +5,14 @@ public class HelperClass {
     String username;
     String email;
     String password;
+    String imgUrl;
+
+    public HelperClass(String username, String email, String password, String imgUrl) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.imgUrl = imgUrl;
+    }
 
     public HelperClass(String username, String email, String password) {
         this.username = username;
