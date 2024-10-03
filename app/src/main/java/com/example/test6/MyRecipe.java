@@ -25,8 +25,8 @@ public class MyRecipe extends AppCompatActivity {
             return insets;
         });
 
-        //        // Bottom navigation code
-//        // Start here
+        // Bottom navigation code
+        // Start here
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.btnedit);
 
