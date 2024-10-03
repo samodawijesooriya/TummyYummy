@@ -47,17 +47,17 @@ public class AddRecipe extends AppCompatActivity {
 
         Spinner spinner = findViewById(R.id.addRecipe_dropdown_spinner);
 
-// Get the array from the strings.xml
+        // Get the array from the strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.recipe_category, android.R.layout.simple_spinner_item);
 
-// Set the layout for dropdown options
+        // Set the layout for dropdown options
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-// Set the adapter to the spinner
+        // Set the adapter to the spinner
         spinner.setAdapter(adapter);
 
-// Optionally, handle the selection events
+        // Optionally, handle the selection events
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
