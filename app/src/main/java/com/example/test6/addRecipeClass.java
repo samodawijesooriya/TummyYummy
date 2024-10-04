@@ -12,17 +12,6 @@ public class addRecipeClass {
 
 
 
-    public addRecipeClass(String recipeID, String name, String ingredients, String method, String duration, String category, String userId, String imgUrl) {
-        this.recipeID = recipeID;
-        this.name = name;
-        this.ingredients = ingredients;
-        this.method = method;
-        this.duration = duration;
-        this.category = category;
-        this.userId = userId;
-        this.imgUrl = imgUrl;
-    }
-
     public addRecipeClass(String recipeID, String name, String ingredients, String method, String duration, String category, String userId) {
         this.recipeID = recipeID;
         this.name = name;
@@ -32,6 +21,7 @@ public class addRecipeClass {
         this.category = category;
         this.userId = userId;
     }
+
 
     public addRecipeClass(String recipeID, String name, String ingredients, String method, String duration, String category) {
         this.recipeID = recipeID;

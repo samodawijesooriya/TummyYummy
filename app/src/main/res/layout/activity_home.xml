@@ -192,6 +192,18 @@
                 android:textColor="#FCFCFF"
                 android:textSize="15sp"
                 android:onClick="onCategoryClick"/>
+
+            <Button
+                android:id="@+id/soupsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:backgroundTint="#000053"
+                android:fontFamily="@font/rambla"
+                android:text="Soups"
+                android:textColor="#FCFCFF"
+                android:textSize="15sp"
+                android:onClick="onCategoryClick"/>
         </LinearLayout>
 
 

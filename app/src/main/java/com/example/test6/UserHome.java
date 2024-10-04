@@ -59,15 +59,13 @@ public class UserHome extends AppCompatActivity {
 
                 if(userProfile != null){
                     String user = userProfile.username;
-
-
                     usernameText.setText(user);
 
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UserHome.this,"", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserHome.this,"Database error", Toast.LENGTH_LONG).show();
             }
         });
 

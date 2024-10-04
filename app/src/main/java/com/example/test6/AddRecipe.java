@@ -160,7 +160,7 @@ public class AddRecipe extends AppCompatActivity {
 
                     if(imageUri != null){
                         progressBar.setVisibility(View.VISIBLE);
-                        uploadToFirebase(imageUri);
+                        uploadToFirebase(imageUri, recipeID);
                     }else{
                         Toast.makeText(AddRecipe.this, "Please select image", Toast.LENGTH_SHORT).show();
                     }
@@ -184,45 +184,45 @@ public class AddRecipe extends AppCompatActivity {
 
     }
 
-    private void uploadToFirebase(Uri uri){
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
 
+    private void uploadToFirebase(Uri uri, String recipeID) {
         final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
 
-
-        imageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        imageReference.putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onSuccess(Uri uri) {
-                        // Update only imgUrl in the database
-                        reference.child(recipeId).child("imgUrl").setValue(uri.toString());
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                // Update the imgUrl field in the database
+                                reference.child(recipeID).child("imgUrl").setValue(uri.toString());
+                                progressBar.setVisibility(View.INVISIBLE);
+                                Toast.makeText(AddRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(AddRecipe.this, MyRecipe.class));
+                                finish();
+                            }
+                        });
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        uploadImgBtn.setEnabled(true); // Re-enable save button
-                        Toast.makeText(AddRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(AddRecipe.this, AddRecipe.class));
-                        finish();
-
+                        Toast.makeText(AddRecipe.this, "Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(AddRecipe.this, "Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    private String getFileExtension(Uri fileUri){
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(contentResolver.getType(fileUri));
     }
 
     private void clearFields() {

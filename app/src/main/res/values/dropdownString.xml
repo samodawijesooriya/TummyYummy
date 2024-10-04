@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="recipe_category">
-        <item>Breakfast</item>
-        <item>Lunch</item>
-        <item>Dinner</item>
-        <item>Dessert</item>
+        <item>Desserts</item>
         <item>Snacks</item>
+        <item>Beverage</item>
+        <item>Salads</item>
+        <item>Soups</item>
     </string-array>
 </resources>

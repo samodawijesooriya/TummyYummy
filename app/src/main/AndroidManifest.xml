@@ -90,6 +90,9 @@
             android:name=".Signin"
             android:exported="false" />
         <activity
+            android:name=".GridItem"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

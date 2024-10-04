@@ -28,6 +28,4 @@ public class Desserts extends AppCompatActivity {
         startActivity(new Intent(this, Home.class));
     }
 
-    public void GoToRecipeView(View view) {startActivity(new Intent(this, RecipeView.class));
-    }
 }

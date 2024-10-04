@@ -40,7 +40,7 @@
         app:srcCompat="@drawable/fav" />
 
     <TextView
-        android:id="@+id/RecipeName"
+        android:id="@+id/recipeView_RecipeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -53,138 +53,109 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/webView" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:orientation="vertical"
+        android:layout_marginTop="13dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RecipeName"
-        app:layout_constraintVertical_bias="0.147">
+        app:layout_constraintTop_toBottomOf="@+id/webView"
+        app:layout_constraintVertical_bias="0.0">
 
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/CardView1inRecipeView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/rounded_rectangle"
-            android:padding="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RecipeName">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/CardView1inRecipeView"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:background="#D8D8D8"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_marginTop="28dp"
+                android:background="@drawable/rounded_rectangle"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/CardView1inRecipeView">
 
-                <TextView
-                    android:id="@+id/IngredientsTitle"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/rambla"
-                    android:text="Ingredients"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:background="#D8D8D8"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-                <TextView
-                    android:id="@+id/Ingredient01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="• Fresh Strawberries                               4 Cups"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/IngredientsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/rambla"
+                        android:text="Ingredients"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/Ingredient02"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="• Sugar                                                     2 Cups"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/recipeView_Ingredients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/Ingredient03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="• Lemon Juice                                         2 tbs"
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/CardView2inRecipeView"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/rounded_rectangle"
-            android:padding="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CardView1inRecipeView">
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/CardView2inRecipeView"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:background="#D8D8D8"
-                android:orientation="vertical"
-                android:padding="15dp"
-                tools:layout_editor_absoluteX="44dp"
-                tools:layout_editor_absoluteY="645dp">
+                android:layout_marginTop="28dp"
+                android:background="@drawable/rounded_rectangle"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/CardView1inRecipeView">
 
-                <TextView
-                    android:id="@+id/Method"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/rambla"
-                    android:text="Methods"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:background="#D8D8D8"
+                    android:orientation="vertical"
+                    android:padding="15dp"
+                    tools:layout_editor_absoluteX="44dp"
+                    tools:layout_editor_absoluteY="645dp">
 
-                <TextView
-                    android:id="@+id/Method1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="• Wash the fresh raspberries thoroughly."
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/MethodName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/rambla"
+                        android:text="Method"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/Method2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="• In a large saucepan, combine the raspberries, sugar, and lemon juice."
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/recipeView_Method"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="• Wash the fresh raspberries thoroughly."
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/Method03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="• Let the mixture boil for about 10-15 minutes."
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
 
     <ImageView
         android:id="@+id/shareIcon"

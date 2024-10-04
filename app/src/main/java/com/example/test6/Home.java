@@ -56,7 +56,7 @@ public class Home extends AppCompatActivity {
                 if(userProfile != null){
                     String user = userProfile.username;
 
-                    usernameText.setText("Hi! " + user);
+                    usernameText.setText("Hi " + user+"!");
                 }
             }
 
@@ -125,9 +125,11 @@ public class Home extends AppCompatActivity {
         } else if (view.getId() == R.id.snacksBtn) {
             intent.putExtra("category", "Snacks");
         } else if (view.getId() == R.id.beveragesBtn) {
-            intent.putExtra("category", "Beverages");
+            intent.putExtra("category", "Beverage");
         } else if (view.getId() == R.id.saladsBtn) {
             intent.putExtra("category", "Salads");
+        } else if (view.getId() == R.id.soupsBtn) {
+            intent.putExtra("category", "Soups");
         }
 
         // Start CategoryActivity
