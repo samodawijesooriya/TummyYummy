@@ -105,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text=""
+                        android:text="Ingredients Go Here"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="• Wash the fresh raspberries thoroughly."
+                        android:text="• Method Goes Here"
                         android:textSize="15sp" />
 
                 </LinearLayout>

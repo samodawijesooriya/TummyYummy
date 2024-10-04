@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipeView">
+    tools:context=".ViewEditDeleteRecipe">
 
     <ImageView
         android:id="@+id/BackBtn"
@@ -24,7 +24,7 @@
     <!-- Delete Button -->
 
     <Button
-        android:id="@+id/addRecipe_cancelBtn"
+        android:id="@+id/editViewRecipe_CancelBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:backgroundTint="#FCFCFF"
@@ -33,18 +33,18 @@
         android:textColor="#000053"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toEndOf="@+id/addRecipe_AddBtn"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toEndOf="@+id/editViewRecipe_EditBtn"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156"
+        app:layout_constraintVertical_bias="0.174"
         app:strokeColor="#000053"
         app:strokeWidth="2dp" />
 
     <Button
-        android:id="@+id/addRecipe_AddBtn"
+        android:id="@+id/editViewRecipe_EditBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:backgroundTint="#000053"
         android:text="Edit"
         android:textColor="@color/white"
@@ -52,7 +52,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.174" />
 
     <ImageView
         android:id="@+id/HeartImage"
@@ -79,22 +79,35 @@
         android:id="@+id/webView"
         android:layout_width="360dp"
         android:layout_height="200dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="204dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/RecipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Rasberry Pie"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/webView" />
+
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
         android:fillViewport="true"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/RecipeName">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,7 +131,8 @@
                     android:layout_height="wrap_content"
                     android:background="#D8D8D8"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:padding="15dp"
+                    android:layout_marginTop="0dp">
 
                     <TextView
                         android:id="@+id/IngredientsTitle"
@@ -132,31 +146,14 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/Ingredient01"
+                        android:id="@+id/recipeView_Ingredients"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="• Fresh Strawberries                               4 Cups"
+                        android:text="Ingredients Go Here"
                         android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/Ingredient02"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="• Sugar                                                     2 Cups"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/Ingredient03"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="• Lemon Juice                                         2 tbs"
-                        android:textSize="15sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -172,7 +169,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/CardView1inRecipeView">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:background="#D8D8D8"
                     android:orientation="vertical"
@@ -181,7 +178,7 @@
                     tools:layout_editor_absoluteY="645dp">
 
                     <TextView
-                        android:id="@+id/Method"
+                        android:id="@+id/MethodName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -192,50 +189,19 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/Method1"
+                        android:id="@+id/recipeView_Method"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="• Wash the fresh raspberries thoroughly."
+                        android:text="• Method Goes Here"
                         android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/Method2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="• In a large saucepan, combine the raspberries, sugar, and lemon juice."
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/Method03"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="• Let the mixture boil for about 10-15 minutes."
-                        android:textSize="15sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/RecipeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Rasberry Pie"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

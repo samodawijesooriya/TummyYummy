@@ -59,7 +59,19 @@ public class Adapter1 extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, RecipeView.class);
+                String currentUserId = addRecipeList.get(i).getUserId();
+                // Get the user ID of the recipe's creator
+                String recipeOwnerId = addRecipeList.get(i).getUserId();
+
+//                Intent intent = new Intent(context, RecipeView.class);
+                Intent intent;
+                if (currentUserId.equals(recipeOwnerId)) {
+                    // If the current user is the owner of the recipe, go to EditRecipeView
+                    intent = new Intent(context, ViewEditDeleteRecipe.class);
+                } else {
+                    // Otherwise, go to RecipeView
+                    intent = new Intent(context, RecipeView.class);
+                }
                 intent.putExtra("recipeId", addRecipeList.get(i).getRecipeID());
                 context.startActivity(intent);
             }

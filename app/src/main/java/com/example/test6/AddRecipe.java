@@ -166,8 +166,7 @@ public class AddRecipe extends AppCompatActivity {
                     }
 
                     if (recipeID != null) {
-                        reference.child(recipeID).setValue(recipe)
-                                .addOnCompleteListener(task -> {
+                        reference.child(recipeID).setValue(recipe).addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(AddRecipe.this, "Recipe added successfully", Toast.LENGTH_SHORT).show();
                                         clearFields();  // Clear the input fields
