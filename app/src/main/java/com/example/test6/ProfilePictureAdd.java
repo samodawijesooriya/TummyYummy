@@ -42,7 +42,7 @@ public class ProfilePictureAdd extends AppCompatActivity {
     ProgressBar progressBar;
     private Uri imageUri;
     Button save;
-    private String userId, username, email, password;
+    private String userId;
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
     final private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 

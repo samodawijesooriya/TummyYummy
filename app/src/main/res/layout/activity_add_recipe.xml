@@ -36,11 +36,14 @@
         app:srcCompat="@drawable/back" />
 
     <!-- Enter Recipe Name Text -->
+
+    <!-- Recipe Name Input -->
+
     <TextView
         android:id="@+id/addRecipe_recipeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/montserrat"
         android:text="Enter Recipe Name"
         android:textSize="15sp"
@@ -50,7 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addRecipe_addRecipeTitle" />
 
-    <!-- Recipe Name Input -->
     <EditText
         android:id="@+id/addRecipe_recipeNameText"
         android:layout_width="345dp"
@@ -178,6 +180,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addRecipe_methodAdd" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -198,75 +201,120 @@
     </LinearLayout>
 
     <!-- Image Upload Card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/addRecipe_CardViewForUpload"
-        android:layout_width="230dp"
-        android:layout_height="149dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#F1F1F1"
-        app:cardCornerRadius="20dp"
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/addRecipe_CardViewForUpload"-->
+<!--        android:layout_width="230dp"-->
+<!--        android:layout_height="149dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:backgroundTint="#F1F1F1"-->
+<!--        app:cardCornerRadius="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.496"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/addRecipe_AddPreparationTime">-->
+
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="110dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.489"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/addRecipe_AddPreparationTime">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="207dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src="@drawable/salad" />-->
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="50dp"-->
+<!--            android:layout_marginTop="125dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:text="Upload Your Image" />-->
+<!--    </androidx.cardview.widget.CardView>-->
+
+    <!-- Add Button -->
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="200dp"
+        android:layout_height="164dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addRecipe_AddPreparationTime">
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="200dp"
-            android:layout_height="110dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addRecipe_AddPreparationTime">
-
-            <ImageView
-                android:layout_width="207dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/salad" />
-
-        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="125dp"
+            android:layout_gravity="center"
             android:fontFamily="@font/montserrat"
-            android:text="Upload Your Image" />
-    </androidx.cardview.widget.CardView>
+            android:text="Upload image..."
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-    <!-- Add Button -->
+        <ImageView
+            android:id="@+id/uploadImage"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@drawable/baseline_image_24" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/progressBarimg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="#000053"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Cancel Button -->
+
     <Button
         android:id="@+id/addRecipe_AddBtn"
         android:layout_width="150dp"
         android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#000053"
         android:text="Add"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/addRecipe_cancelBtn"
-        app:layout_constraintTop_toBottomOf="@+id/addRecipe_CardViewForUpload"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-    <!-- Cancel Button -->
     <Button
         android:id="@+id/addRecipe_cancelBtn"
         android:layout_width="150dp"
         android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#FCFCFF"
         android:onClick="GoBackToMyRecipe"
         android:text="Cancel"
         android:textColor="#000053"
-        app:strokeColor="#000053"
-        app:strokeWidth="2dp"
-        app:layout_constraintStart_toEndOf="@+id/addRecipe_AddBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addRecipe_CardViewForUpload"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toEndOf="@+id/addRecipe_AddBtn"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:strokeColor="#000053"
+        app:strokeWidth="2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

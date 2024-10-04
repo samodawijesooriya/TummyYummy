@@ -1,17 +1,26 @@
 package com.example.test6;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -20,19 +29,30 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class AddRecipe extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private String recipeId;
     EditText name, ingredients, method, duration;
     Button addBtn, cancelBtn;
     Spinner category;
+    private Uri imageUri;
     DatabaseReference reference;
+    private FloatingActionButton uploadImgBtn;
+    private ImageView uploadImg;
+    ProgressBar progressBar;
+    final private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +65,9 @@ public class AddRecipe extends AppCompatActivity {
             return insets;
         });
 
-        Spinner spinner = findViewById(R.id.addRecipe_dropdown_spinner);
+        Spinner category = findViewById(R.id.addRecipe_dropdown_spinner);
+
+
 
         // Get the array from the strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -55,10 +77,10 @@ public class AddRecipe extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Set the adapter to the spinner
-        spinner.setAdapter(adapter);
+        category.setAdapter(adapter);
 
         // Optionally, handle the selection events
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Handle selection
@@ -73,7 +95,14 @@ public class AddRecipe extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
+        recipeId = mAuth.getCurrentUser().getUid();
+        uploadImg = findViewById(R.id.uploadImage);
+        progressBar = findViewById(R.id.progressBarimg);
+        progressBar.setVisibility(View.INVISIBLE);
+
+        mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("recipes");
+
 
         name = findViewById(R.id.addRecipe_recipeNameText);
         ingredients = findViewById(R.id.addRecipe_ingredientTextAdd);
@@ -81,7 +110,32 @@ public class AddRecipe extends AppCompatActivity {
         duration = findViewById(R.id.addRecipe_AddPreparationTime);
         addBtn = findViewById(R.id.addRecipe_AddBtn);
         cancelBtn = findViewById(R.id.addRecipe_cancelBtn);
-        category = findViewById(R.id.addRecipe_dropdown_spinner);
+//        category = findViewById(R.id.addRecipe_dropdown_spinner);
+
+
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if(result.getResultCode() == AppCompatActivity.RESULT_OK){
+                    Intent data = result.getData();
+                    assert data != null;
+                    imageUri = data.getData();
+                    uploadImg.setImageURI(imageUri);
+                }else{
+                    Toast.makeText(AddRecipe.this, "No image selected", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        uploadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPicker = new Intent();
+                photoPicker.setAction(Intent.ACTION_GET_CONTENT);
+                photoPicker.setType("image/*");
+                activityResultLauncher.launch(photoPicker);
+            }
+        });
 
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +156,13 @@ public class AddRecipe extends AppCompatActivity {
 
                     addRecipeClass recipe = new addRecipeClass(recipeID, recipeName, recipeIngredients, recipeMethod, videoDuration, selectedCategory);
 
+                    if(imageUri != null){
+                        progressBar.setVisibility(View.VISIBLE);
+                        uploadToFirebase(imageUri);
+                    }else{
+                        Toast.makeText(AddRecipe.this, "Please select image", Toast.LENGTH_SHORT).show();
+                    }
+
                     if (recipeID != null) {
                         reference.child(recipeID).setValue(recipe)
                                 .addOnCompleteListener(task -> {
@@ -119,6 +180,47 @@ public class AddRecipe extends AppCompatActivity {
 
 
 
+    }
+
+    private void uploadToFirebase(Uri uri){
+
+        final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+
+
+        imageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // Update only imgUrl in the database
+                        reference.child(recipeId).child("imgUrl").setValue(uri.toString());
+                        progressBar.setVisibility(View.INVISIBLE);
+                        uploadImgBtn.setEnabled(true); // Re-enable save button
+                        Toast.makeText(AddRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(AddRecipe.this, AddRecipe.class));
+                        finish();
+
+                    }
+                });
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(AddRecipe.this, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private String getFileExtension(Uri fileUri){
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(fileUri));
     }
 
     private void clearFields() {
