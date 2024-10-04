@@ -245,8 +245,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="200dp"
-        android:layout_height="164dp"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -259,30 +259,44 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/montserrat"
-            android:text="Upload image..."
+            android:text="Upload image / video"
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/uploadImage"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:src="@drawable/baseline_image_24" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ProgressBar
-                android:id="@+id/progressBarimg"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:indeterminateTint="#000053"
-                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/uploadImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/baseline_image_24" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#000" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/addRecipe_uploadVideo"
+                android:layout_marginEnd="10dp"
+                android:scaleType="center"
+                android:src="@drawable/baseline_music_video_24"/>
 
         </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBarimg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="#000053"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
