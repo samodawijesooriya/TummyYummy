@@ -16,24 +16,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-
-import java.util.List;
 
 public class RecipeView extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
     private String recipeId;
     private TextView recipeName;
-    private TextView ingredientsview;
+    private TextView ingredientsView;
     private TextView methodView;
+    private addRecipeClass currentRecipe; // Store the current recipe data
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,7 @@ public class RecipeView extends AppCompatActivity {
 
         // Initialize UI components
         recipeName = findViewById(R.id.recipeView_RecipeName);
-        ingredientsview = findViewById(R.id.recipeView_Ingredients);
+        ingredientsView = findViewById(R.id.recipeView_Ingredients);
         methodView = findViewById(R.id.recipeView_Method);
 
         mAuth = FirebaseAuth.getInstance();
@@ -62,58 +59,53 @@ public class RecipeView extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
 
+        // Fetch recipe details from the database
         reference.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                addRecipeClass addRecipeClass = dataSnapshot.getValue(addRecipeClass.class);
+                currentRecipe = dataSnapshot.getValue(addRecipeClass.class);
 
-                if(addRecipeClass != null){
-                    String Name = addRecipeClass.getName();
-                    String ingredients = addRecipeClass.getIngredients();
-                    String method = addRecipeClass.getMethod();
+                if (currentRecipe != null) {
+                    String Name = currentRecipe.getName();
+                    String ingredients = currentRecipe.getIngredients();
+                    String method = currentRecipe.getMethod();
 
                     recipeName.setText(Name);
-                    ingredientsview.setText(ingredients);
+                    ingredientsView.setText(ingredients);
                     methodView.setText(method);
-
-                }else{
-                    Toast.makeText(RecipeView.this,"No data", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(RecipeView.this, "No data", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(RecipeView.this,"Database Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(RecipeView.this, "Database Error", Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
+    // Method to share the recipe when the share button is clicked
+    public void shareRecipe(View view) {
+        if (currentRecipe != null) {
+            // Format the recipe details for sharing
+            String shareText = "Check out this amazing recipe: " + currentRecipe.getName() + "!\n\n" +
+                    "Ingredients:\n" + currentRecipe.getIngredients() + "\n\n" +
+                    "Method:\n" + currentRecipe.getMethod();
 
-    // Method to go back to Desserts activity
-    public void GoBackToDesserts(View view) {
-        startActivity(new Intent(this, Home.class));
+            // Create the share intent
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+
+            // Optionally add a subject (used in email clients, etc.)
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Delicious " + currentRecipe.getName() + " Recipe");
+
+            // Show the sharing options
+            startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));
+        } else {
+            Toast.makeText(this, "Recipe not loaded yet!", Toast.LENGTH_SHORT).show();
+        }
     }
 
-//
-//    // Method to share the recipe on social media
-//    public void shareRecipe(View view) {
-//        String shareText = "Check out this amazing Raspberry Pie recipe! Ingredients:\n" +
-//                "- Fresh Strawberries (4 Cups)\n" +
-//                "- Sugar (2 Cups)\n" +
-//                "- Lemon Juice (2 tbs)\n" +
-//                "\nSteps:\n" +
-//                "1. Wash the raspberries.\n" +
-//                "2. Combine raspberries, sugar, and lemon juice.\n" +
-//                "3. Boil for 10-15 minutes.";
-//
-//        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//        shareIntent.setType("text/plain");
-//        shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
-//
-//        // Optionally add a subject (used in email clients, etc.)
-//        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Delicious Raspberry Pie Recipe");
-//
-//        // Show the sharing options
-//        startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));
-//    }
 }

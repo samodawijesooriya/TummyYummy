@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ViewEditDeleteRecipe extends AppCompatActivity {
 
     private String recipeId;
+    private addRecipeClass currentRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +45,30 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+    }
+
+    // Method to share the recipe when the share button is clicked
+    public void shareRecipe(View view) {
+        if (currentRecipe != null) {
+            // Format the recipe details for sharing
+            String shareText = "Check out this amazing recipe: " + currentRecipe.getName() + "!\n\n" +
+                    "Ingredients:\n" + currentRecipe.getIngredients() + "\n\n" +
+                    "Method:\n" + currentRecipe.getMethod();
+
+            // Create the share intent
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+
+            // Optionally add a subject (used in email clients, etc.)
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Delicious " + currentRecipe.getName() + " Recipe");
+
+            // Show the sharing options
+            startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));
+        } else {
+            Toast.makeText(this, "Recipe not loaded yet!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
