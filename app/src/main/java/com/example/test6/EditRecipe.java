@@ -26,6 +26,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -50,7 +51,8 @@ public class EditRecipe extends AppCompatActivity {
     private EditText durationEdit;
     Button saveBtn, editCancelBtn;
     private Uri imageUri;
-    private ImageView uploadImg;
+    private Uri videoUriEdit;
+    private ImageView uploadImg, uploadVideo;
     ProgressBar progressBar;
     final private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
@@ -76,6 +78,7 @@ public class EditRecipe extends AppCompatActivity {
         Spinner category = findViewById(R.id.editRecipe_dropdown_spinner);
 
         uploadImg = findViewById(R.id.EdituploadImage);
+        uploadVideo = findViewById(R.id.EdituploadVideo);
         progressBar = findViewById(R.id.EditprogressBarimg);
         progressBar.setVisibility(View.INVISIBLE);
 
@@ -126,6 +129,34 @@ public class EditRecipe extends AppCompatActivity {
             }
         });
 
+        // Upload video code
+        ActivityResultLauncher<Intent> videoPickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
+                            Intent data = result.getData();
+                            if (data != null) {
+                                videoUriEdit = data.getData();
+                                Glide.with(EditRecipe.this).load(videoUriEdit).into(uploadVideo);  // Update the video view
+                            } else {
+                                Toast.makeText(EditRecipe.this, "No video selected", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+        );
+
+        uploadVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent videoPicker = new Intent(Intent.ACTION_PICK);
+                videoPicker.setType("video/*");
+                videoPickerLauncher.launch(videoPicker);  // Use the video picker launcher
+            }
+        });
+
         uploadImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,9 +186,10 @@ public class EditRecipe extends AppCompatActivity {
                     // Update the existing recipe using the recipeId
                     addRecipeClass updatedRecipe = new addRecipeClass(recipeId, name, recipeIngredients, recipeMethod, videoDuration, selectedCategory, userID);
 
-                    if(imageUri != null){
+                    if(imageUri != null || videoUriEdit != null){
                         progressBar.setVisibility(View.VISIBLE);
                         uploadToFirebase(imageUri, recipeId);
+                        uploadVideo(videoUriEdit, recipeId);
                     }else{
                         Toast.makeText(EditRecipe.this, "Please select image", Toast.LENGTH_SHORT).show();
                     }
@@ -204,6 +236,37 @@ public class EditRecipe extends AppCompatActivity {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private void uploadVideo(Uri uri, String recipeID){
+        final StorageReference videoReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        videoReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                videoReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // Update the imgUrl field in the database
+                        reference.child(recipeID).child("videoUrl").setValue(uri.toString());
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(EditRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(EditRecipe.this, MyRecipe.class));
+                        finish();
+                    }
+                });
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(EditRecipe.this, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void uploadToFirebase(Uri uri, String recipeID) {

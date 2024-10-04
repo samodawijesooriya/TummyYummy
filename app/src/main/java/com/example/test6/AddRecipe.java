@@ -195,7 +195,7 @@ public class AddRecipe extends AppCompatActivity {
                         uploadToFirebase(imageUri, recipeID);
                         uploadVideo(videoUri, recipeID);
                     }else{
-                        Toast.makeText(AddRecipe.this, "Please select image", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddRecipe.this, "Please select image and video", Toast.LENGTH_SHORT).show();
                     }
 
                     if (recipeID != null) {

@@ -1,13 +1,18 @@
 package com.example.test6;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,12 +21,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class RecipeView extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -30,7 +39,9 @@ public class RecipeView extends AppCompatActivity {
     private TextView recipeName;
     private TextView ingredientsView;
     private TextView methodView;
-    private addRecipeClass currentRecipe; // Store the current recipe data
+    private addRecipeClass currentRecipe;// Store the current recipe data
+    private VideoView videoView;
+    final private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +58,22 @@ public class RecipeView extends AppCompatActivity {
         recipeName = findViewById(R.id.recipeView_RecipeName);
         ingredientsView = findViewById(R.id.recipeView_Ingredients);
         methodView = findViewById(R.id.recipeView_Method);
+        videoView = findViewById(R.id.RecipeView_videoView);
 
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("recipes");
         recipeId = getIntent().getStringExtra("recipeId");
 
         // Set up WebView to display the YouTube video
-        WebView webView = findViewById(R.id.webView);
-        String video = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/gH0MVoWvtl8?si=U4S-_cLhfs1TtDw-\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>";
-        webView.loadData(video, "text/html", "utf-8");
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebChromeClient(new WebChromeClient());
+//        WebView webView = findViewById(R.id.webView);
+//        String video1 = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/gH0MVoWvtl8?si=U4S-_cLhfs1TtDw-\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>";
+//        webView.loadData(video1, "text/html", "utf-8");
+//        webView.getSettings().setJavaScriptEnabled(true);
+//        webView.setWebChromeClient(new WebChromeClient());
+
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
 
         // Fetch recipe details from the database
         reference.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -70,9 +86,15 @@ public class RecipeView extends AppCompatActivity {
                     String ingredients = currentRecipe.getIngredients();
                     String method = currentRecipe.getMethod();
 
+
                     recipeName.setText(Name);
                     ingredientsView.setText(ingredients);
                     methodView.setText(method);
+
+                    String videoUrlnew = currentRecipe.getVideoUrl();
+                    if( videoUrlnew != null){
+                        setVideo(videoUrlnew);
+                    }
                 } else {
                     Toast.makeText(RecipeView.this, "No data", Toast.LENGTH_LONG).show();
                 }
@@ -106,6 +128,22 @@ public class RecipeView extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Recipe not loaded yet!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void setVideo(String videoUrl) {
+        VideoView videoView = findViewById(R.id.RecipeView_videoView);
+
+        // Set video URI to VideoView
+        Uri uri = Uri.parse(videoUrl);
+        videoView.setVideoURI(uri);
+
+        // Add media controls to play, pause, etc.
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
+
+        // Start video playback
+        videoView.start();
     }
 
 }

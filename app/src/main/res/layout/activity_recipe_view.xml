@@ -19,8 +19,8 @@
         app:srcCompat="@drawable/back"
         android:onClick="GoBackToDesserts"/>
 
-    <WebView
-        android:id="@+id/webView"
+    <VideoView
+        android:id="@+id/RecipeView_videoView"
         android:layout_width="360dp"
         android:layout_height="250dp"
         android:layout_marginTop="128dp"
@@ -61,7 +61,7 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webView"
+        app:layout_constraintTop_toBottomOf="@+id/RecipeView_videoView"
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
