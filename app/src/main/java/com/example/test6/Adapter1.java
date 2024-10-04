@@ -56,7 +56,7 @@ public class Adapter1 extends BaseAdapter {
         TextView videoDuration = view.findViewById(R.id.videoDuration1);
         TextView recipeName = view.findViewById(R.id.recipeNameText);
 
-        Glide.with(context).load(addRecipeList.get(i).getImageUrl()).into(gridImage);
+        Glide.with(context).load(addRecipeList.get(i).getImgUrl()).into(gridImage);
         videoDuration.setText(addRecipeList.get(i).getDuration());
         recipeName.setText(addRecipeList.get(i).getName());
 
