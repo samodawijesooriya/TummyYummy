@@ -42,6 +42,7 @@ public class Home extends AppCompatActivity {
         });
 
 
+
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         userId = mAuth.getCurrentUser().getUid();
@@ -112,6 +113,27 @@ public class Home extends AppCompatActivity {
         });
         // Ends here
     }
+
+    public void onCategoryClick(View view) {
+        Intent intent = new Intent(this, Category.class);
+
+        // Use if-else instead of switch
+        if (view.getId() == R.id.home_allbtn) {
+            intent.putExtra("category", "All");
+        } else if (view.getId() == R.id.dessertBtn) {
+            intent.putExtra("category", "Desserts");
+        } else if (view.getId() == R.id.snacksBtn) {
+            intent.putExtra("category", "Snacks");
+        } else if (view.getId() == R.id.beveragesBtn) {
+            intent.putExtra("category", "Beverages");
+        } else if (view.getId() == R.id.saladsBtn) {
+            intent.putExtra("category", "Salads");
+        }
+
+        // Start CategoryActivity
+        startActivity(intent);
+    }
+
 
     public void GoToDesserts(View view) {
         startActivity(new Intent(this, Desserts.class));

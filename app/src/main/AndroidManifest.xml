@@ -18,6 +18,9 @@
             android:name=".UploadImage"
             android:exported="false" />
         <activity
+            android:name=".Category"
+            android:exported="false" />
+        <activity
             android:name=".EditRecipe"
             android:exported="false" />
         <activity

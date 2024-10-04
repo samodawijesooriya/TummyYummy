@@ -25,7 +25,7 @@ public class Favourites extends AppCompatActivity {
         });
         //        // Bottom navigation code
 //        // Start here
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.favourites_bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.fav);
 
         bottomNavigationView.setOnItemSelectedListener(item ->{

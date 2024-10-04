@@ -25,7 +25,7 @@ public class History extends AppCompatActivity {
         });
         // Bottom navigation code
         // Start here
-            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            BottomNavigationView bottomNavigationView = findViewById(R.id.history_bottomNavigationView);
             bottomNavigationView.setSelectedItemId(R.id.history);
 
             bottomNavigationView.setOnItemSelectedListener(item ->{

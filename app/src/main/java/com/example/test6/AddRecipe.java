@@ -154,7 +154,9 @@ public class AddRecipe extends AppCompatActivity {
                 }else {
                     String recipeID = reference.push().getKey();
 
-                    addRecipeClass recipe = new addRecipeClass(recipeID, recipeName, recipeIngredients, recipeMethod, videoDuration, selectedCategory);
+                    String userID = mAuth.getCurrentUser().getUid();
+
+                    addRecipeClass recipe = new addRecipeClass(recipeID, recipeName, recipeIngredients, recipeMethod, videoDuration, selectedCategory, userID);
 
                     if(imageUri != null){
                         progressBar.setVisibility(View.VISIBLE);

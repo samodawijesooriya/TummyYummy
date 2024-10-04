@@ -142,44 +142,47 @@
                 android:fontFamily="@font/montserrat"
                 android:text="All"
                 android:textColor="#FCFCFF"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:onClick="onCategoryClick"/>
 
             <Button
-                android:id="@+id/dessetBtn"
+                android:id="@+id/dessertBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:backgroundTint="#000053"
                 android:fontFamily="@font/rambla"
-                android:onClick="GoToDesserts"
                 android:text="Desserts"
                 android:textColor="#FCFCFF"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:onClick="onCategoryClick"/>
 
             <Button
-                android:id="@+id/riceBtn"
+                android:id="@+id/snacksBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:backgroundTint="#000053"
                 android:fontFamily="@font/montserrat"
-                android:text="Rice"
+                android:text="Snacks"
                 android:textColor="#FCFCFF"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:onClick="onCategoryClick"/>
 
             <Button
-                android:id="@+id/CurryBtn"
+                android:id="@+id/beveragesBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:backgroundTint="#000053"
                 android:fontFamily="@font/rambla"
-                android:text="Curry"
+                android:text="Beverage"
                 android:textColor="#FCFCFF"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:onClick="onCategoryClick"/>
 
             <Button
-                android:id="@+id/Vegi"
+                android:id="@+id/saladsBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -187,7 +190,8 @@
                 android:fontFamily="@font/rambla"
                 android:text="Salads"
                 android:textColor="#FCFCFF"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:onClick="onCategoryClick"/>
         </LinearLayout>
 
 
