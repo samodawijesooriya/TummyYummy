@@ -198,11 +198,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="200dp"
-        android:layout_height="164dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/editRecipeLinearLayput"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -213,30 +213,42 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/montserrat"
-            android:text="Upload image..."
+            android:text="Upload image / video"
             android:textSize="15sp"
             android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/EdituploadImage"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:src="@drawable/baseline_image_24" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ProgressBar
-                android:id="@+id/EditprogressBarimg"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:indeterminateTint="#000053"
-                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/EdituploadImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/baseline_image_24" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#000" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/uploadVideo"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/baseline_music_video_24"/>
 
         </LinearLayout>
+        <ProgressBar
+            android:id="@+id/EditprogressBarimg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="#000053"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
@@ -254,7 +266,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/editRecipeLinearLayput" />
 
     <Button
         android:id="@+id/editRecipe_CancelBtn"
@@ -266,7 +278,7 @@
         android:textColor="#000053"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editRecipe_SaveBtn"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/editRecipeLinearLayput"
         app:strokeColor="#000053"
         app:strokeWidth="2dp" />
 

@@ -9,6 +9,7 @@ public class addRecipeClass {
     String category;
     String userId;
     String imgUrl;
+    String videoUrl;
 
 
 
@@ -35,6 +36,13 @@ public class addRecipeClass {
     public addRecipeClass() {
     }
 
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
 
     public String getRecipeID() {
         return recipeID;
