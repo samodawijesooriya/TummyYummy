@@ -1,3 +1,5 @@
+// IM/2021/076 (start)
+
 package com.example.test6;
 
 public class Review {
@@ -6,7 +8,6 @@ public class Review {
     private float rating;  // Add rating
     private String userId;
 
-    // Default constructor (required for Firebase)
     public Review() {
     }
 
@@ -17,7 +18,6 @@ public class Review {
         this.userId = userId;
     }
 
-    // Getters and setters
     public String getReviewId() {
         return reviewId;
     }
@@ -50,3 +50,5 @@ public class Review {
         this.userId = userId;
     }
 }
+
+// IM/2021/076 (end)
