@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- IM/2021/103 Start-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".Favourites">
 
+    <!-- Title TextView for "Favourites" -->
     <TextView
         android:id="@+id/favourites_favouriteText"
         android:layout_width="wrap_content"
@@ -22,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.067" />
 
+    <!-- SearchView for searching recipes -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/favourites_searchView"
         android:layout_width="345dp"
@@ -36,6 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.142" />
 
+    <!-- ScrollView containing recipe cards -->
     <ScrollView
         android:id="@+id/favourites_scrollView2"
         android:layout_width="415dp"
@@ -150,6 +154,7 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- Bottom navigation bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/favourites_bottomNavigationView"
         android:layout_width="match_parent"
@@ -169,3 +174,4 @@
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- IM/2021/103 End -->
