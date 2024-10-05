@@ -32,12 +32,23 @@
     <ImageView
         android:id="@+id/HeartImage"
         android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_marginTop="44dp"
-        android:layout_marginEnd="104dp"
+        android:layout_marginEnd="92dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fav" />
+
+    <ImageView
+        android:id="@+id/ReviewImage"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/HeartImage"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toEndOf="@+id/BackBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_rate_review_24" />
 
     <TextView
         android:id="@+id/recipeView_RecipeName"
@@ -45,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/montserrat"
-        android:text="Rasberry Pie"
+        android:text="Recipe Name"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="Ingredients Go Here"
+                        android:text="No Ingredients"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -148,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="• Method Goes Here"
+                        android:text="No Method"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -159,8 +170,8 @@
 
     <ImageView
         android:id="@+id/shareIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="35dp"
+        android:layout_height="38dp"
         android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.863"

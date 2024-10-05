@@ -196,4 +196,18 @@ public class Home extends AppCompatActivity {
     public void GoToDesserts(View view) {
         startActivity(new Intent(this, Desserts.class));
     }
+
+    @Override
+    public void onBackPressed() {
+        // Show a confirmation dialog before exiting
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Exit App")
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Close the app
+                    finishAffinity();  // Exits the app
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 }
