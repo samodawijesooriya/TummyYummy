@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -15,9 +16,12 @@ import android.widget.VideoView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +31,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewEditDeleteRecipe extends AppCompatActivity {
 
@@ -111,9 +118,100 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             }
         });
 
+        ImageView reviewImage = findViewById(R.id.ReviewImage);
+
+        reviewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showReviewPopup();
+            }
+        });
 
 
     }
+
+    private void showReviewPopup() {
+        // Create the popup window for adding and viewing reviews
+        View popupView = getLayoutInflater().inflate(R.layout.popup_review, null);
+        final android.widget.PopupWindow popupWindow = new android.widget.PopupWindow(popupView,
+                ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT, true);
+
+        // Find views inside the popup
+        EditText reviewInput = popupView.findViewById(R.id.reviewInput);
+        RatingBar ratingBar = popupView.findViewById(R.id.ratingBar); // New RatingBar
+        Button submitReviewBtn = popupView.findViewById(R.id.submitReviewBtn);
+        RecyclerView reviewsRecyclerView = popupView.findViewById(R.id.reviewsRecyclerView);
+
+        // Setup RecyclerView
+        reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<Review> reviewsList = new ArrayList<>();
+        ReviewAdapter adapter = new ReviewAdapter(reviewsList);
+        reviewsRecyclerView.setAdapter(adapter);
+
+// Load past reviews and update the adapter
+        loadPastReviews(reviewsList, adapter);
+
+
+        // Submit review button click listener
+        submitReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String reviewText = reviewInput.getText().toString();
+                float rating = ratingBar.getRating(); // Get the selected rating
+
+                if (!reviewText.isEmpty() && rating > 0) {
+                    submitReview(reviewText, rating);
+                    reviewInput.setText(""); // Clear input field
+                    ratingBar.setRating(0); // Reset rating
+                    popupWindow.dismiss(); // Close popup after submission
+                } else {
+                    Toast.makeText(ViewEditDeleteRecipe.this, "Please enter a review and select a rating", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Show the popup
+        popupWindow.showAtLocation(findViewById(R.id.main), android.view.Gravity.CENTER, 0, 0);
+    }
+
+
+    private void submitReview(String reviewText, float rating) {
+        DatabaseReference reviewsRef = reference.child(recipeId).child("reviews");
+        String reviewId = reviewsRef.push().getKey();
+
+        Review newReview = new Review(reviewId, reviewText, rating, mAuth.getCurrentUser().getUid()); // Pass rating to Review constructor
+
+        reviewsRef.child(reviewId).setValue(newReview).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(ViewEditDeleteRecipe.this, "Review submitted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(ViewEditDeleteRecipe.this, "Failed to submit review", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    private void loadPastReviews(List<Review> reviewsList, ReviewAdapter adapter) {
+        DatabaseReference reviewsRef = reference.child(recipeId).child("reviews");
+
+        reviewsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                reviewsList.clear();
+                for (DataSnapshot reviewSnapshot : snapshot.getChildren()) {
+                    Review review = reviewSnapshot.getValue(Review.class);
+                    reviewsList.add(review);
+                }
+                adapter.notifyDataSetChanged(); // Notify adapter to refresh the RecyclerView
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ViewEditDeleteRecipe.this, "Failed to load reviews", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     // Method to share the recipe when the share button is clicked
     public void shareRecipe(View view) {
