@@ -1,6 +1,8 @@
 package com.example.test6;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -13,6 +15,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
@@ -24,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        sharedPreferences = getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        if (sharedPreferences.getBoolean("isLoggedIn", false)) {
+            startActivity(new Intent(MainActivity.this, Home.class));
+            finish();
+        }
     }
 
     public void Signin(View view) {

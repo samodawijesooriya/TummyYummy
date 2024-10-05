@@ -1,6 +1,8 @@
 package com.example.test6;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,6 +35,9 @@ public class Signin extends AppCompatActivity {
     private Button SignInBtn;
     private TextView forgotPass;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,10 @@ public class Signin extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
 
         mAuth = FirebaseAuth.getInstance();
+
+        sharedPreferences = getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         SignInEmail = findViewById(R.id.sign_in_email);
         SignInPassword = findViewById(R.id.sign_in_password);
         SignInBtn = findViewById(R.id.sign_in_login);
@@ -59,9 +68,16 @@ public class Signin extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
-                                        Toast.makeText(Signin.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                                        editor.putBoolean("isLoggedIn", true);
+                                        editor.putString("email", email);
+                                        editor.apply();
+
                                         startActivity(new Intent(Signin.this, Home.class));
                                         finish();
+
+                                        Toast.makeText(Signin.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
