@@ -41,6 +41,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+// IM/2021/082 (Start)
+
 public class EditRecipe extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
@@ -67,7 +69,7 @@ public class EditRecipe extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize UI components
+        // Initializing Variables
         recipeName = findViewById(R.id.editRecipe_recipeNameText);
         ingredientsEdit = findViewById(R.id.editRecipe_ingredientTextAdd);
         methodEdit = findViewById(R.id.addRecipe_methodAdd);
@@ -87,7 +89,7 @@ public class EditRecipe extends AppCompatActivity {
 
         recipeId = getIntent().getStringExtra("recipeId");
 
-        // Get data from the database and fetch them inside of the text boxes
+        // Get data from DB
         reference.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -99,6 +101,7 @@ public class EditRecipe extends AppCompatActivity {
                     String method = addRecipeClass.getMethod();
                     String duration = addRecipeClass.getDuration();
 
+                    // Retrieve Data FRom FireBase
                     recipeName.setText(name);
                     ingredientsEdit.setText(ingredients);
                     methodEdit.setText(method);
@@ -167,7 +170,7 @@ public class EditRecipe extends AppCompatActivity {
             }
         });
 
-        // When click save button save to the database
+        // Save to DB
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,7 +200,7 @@ public class EditRecipe extends AppCompatActivity {
                     reference.child(recipeId).setValue(updatedRecipe).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(EditRecipe.this, "Recipe updated successfully", Toast.LENGTH_SHORT).show();
-                            clearFields();  // Clear the input fields or navigate back if needed
+                            clearFields();
                         } else {
                             Toast.makeText(EditRecipe.this, "Failed to update recipe", Toast.LENGTH_SHORT).show();
                         }
@@ -214,18 +217,13 @@ public class EditRecipe extends AppCompatActivity {
             }
         });
 
-
-        // Get the array from the strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.recipe_category, android.R.layout.simple_spinner_item);
 
-        // Set the layout for dropdown options
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // Set the adapter to the spinner
         category.setAdapter(adapter);
 
-        // Optionally, handle the selection events
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -235,7 +233,6 @@ public class EditRecipe extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Do something when nothing selected
             }
         });
     }
@@ -319,3 +316,5 @@ public class EditRecipe extends AppCompatActivity {
         durationEdit.setText("");
     }
 }
+
+// IM/2021/082 (End)

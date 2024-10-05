@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+// IM/2021/082 (Start)
+
 public class ChangeEmail extends AppCompatActivity {
 
     private EditText Email;
@@ -42,26 +44,24 @@ public class ChangeEmail extends AppCompatActivity {
     public void ChangeEmailFunc(View view) {
         String newEmail = Email.getText().toString().trim();
 
-        // Validate input
+        // validations
         if (newEmail.isEmpty()) {
             Email.setError("Name cannot be empty");
             Email.requestFocus();
             return;
         }
 
-        // Get current user ID
         String userId = mAuth.getCurrentUser().getUid();
 
-        // Update Firebase with the new name
         reference.child(userId).child("email").setValue(newEmail).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Success feedback to the user
                 Toast.makeText(ChangeEmail.this, "Email updated successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, ProfileSettings.class));
             } else {
-                // Failed to update
                 Toast.makeText(ChangeEmail.this, "Failed to update email", Toast.LENGTH_SHORT).show();
             }
         });
     }
 }
+
+// IM/2021/082 (End)

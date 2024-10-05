@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+// IM/2021/118 (Start)
+
 public class AboutUs extends AppCompatActivity {
 
     @Override
@@ -28,3 +30,5 @@ public class AboutUs extends AppCompatActivity {
         startActivity(new Intent(this, UserHome.class));
     }
 }
+
+// IM/2021/118 (End)

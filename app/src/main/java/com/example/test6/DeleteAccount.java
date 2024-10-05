@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
+// IM/2021/104 Start
 public class DeleteAccount extends AppCompatActivity {
 
     // IM/2021/059 (start)
@@ -61,8 +62,8 @@ public class DeleteAccount extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         AlertDialog progressDialog = new AlertDialog.Builder(DeleteAccount.this)
-                                .setView(R.layout.dialog_progress) // Use the custom layout
-                                .setCancelable(false) // Prevent cancellation
+                                .setView(R.layout.dialog_progress)
+                                .setCancelable(false)
                                 .create();
 
                         progressDialog.show();
@@ -99,3 +100,5 @@ public class DeleteAccount extends AppCompatActivity {
         startActivity(new Intent(this, ProfileSettings.class));
     }
 }
+
+// IM/2021/104 End

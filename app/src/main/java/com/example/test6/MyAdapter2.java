@@ -25,7 +25,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
     // create firebase object
     protected FirebaseAuth mAuth;
     private Context context;
-    private List<addRecipeClass> addRecipeClassList;    // Add a recipe list for geting addRecipeClass as a list
+    private List<addRecipeClass> addRecipeClassList;
 
     // MayAdapter2 constructor
     public MyAdapter2(Context context, List<addRecipeClass> addRecipeClassList) {

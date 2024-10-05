@@ -8,6 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+//IM/2021/118 Strat
 public class GridItem extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +20,6 @@ public class GridItem extends AppCompatActivity {
                     return insets;
         });
     }
-
-    // This method is triggered when the ImageView is clicked
-//    public void GoToRecipeView(View view) {
-//        // Navigate to another activity
-//        Intent intent = new Intent(GridItem.this, History.class);
-//        startActivity(intent);
-//    }
 }
+
+//IM/2021/118

@@ -33,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
+// IM/2021/082 (Start)
+
 public class ProfileSettings extends AppCompatActivity {
 
     private DatabaseReference reference;
@@ -64,16 +66,15 @@ public class ProfileSettings extends AppCompatActivity {
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // Map the data to your custom HelperClass or directly retrieve the fields
+                // Map the data to custom HelperClass or directly retrieve the fields
                 HelperClass userProfile = dataSnapshot.getValue(HelperClass.class);
 
                 if (userProfile != null) {
-                    // Get the username
-                    String username = userProfile.getUsername(); // Assuming "username" field exists
+                    // get Details
+                    String username = userProfile.getUsername();
                     String Email = userProfile.getEmail();
                     String mobile = userProfile.getMobile();
 
-                    // Set the retrieved username to the TextView
                     if(username != null){
                         userName.setText(username);
                     }
@@ -81,7 +82,6 @@ public class ProfileSettings extends AppCompatActivity {
                         email.setText(Email);
                     }
                     if (mobile != null) {
-                        // If the mobile number exists, set it in the TextView
                         mobileNumber.setText(mobile);
                     } else {
                         mobileNumber.setText("xxxxxxxxxx");
@@ -180,3 +180,5 @@ public class ProfileSettings extends AppCompatActivity {
         startActivity(new Intent(this, DeleteAccount.class));
     }
 }
+
+// IM/2021/082 (End)

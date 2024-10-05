@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+// IM/2021/082 (Start)
+
 public class ChangeName extends AppCompatActivity {
 
     private EditText Name;
@@ -42,28 +44,24 @@ public class ChangeName extends AppCompatActivity {
     public void ChangeNameFunc(View view) {
         String newName = Name.getText().toString().trim();
 
-        // Validate input
+        // Validations
         if (newName.isEmpty()) {
             Name.setError("Name cannot be empty");
             Name.requestFocus();
             return;
         }
 
-        // Get current user ID
         String userId = mAuth.getCurrentUser().getUid();
 
-        // Update Firebase with the new name
+        // Update Firebase
         reference.child(userId).child("username").setValue(newName).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Success feedback to the user
                         Toast.makeText(ChangeName.this, "Name updated successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(this, ProfileSettings.class));
                     } else {
-                        // Failed to update
                         Toast.makeText(ChangeName.this, "Failed to update name", Toast.LENGTH_SHORT).show();
                     }
         });
     }
-
-
 }
+// IM/2021/082 (End)

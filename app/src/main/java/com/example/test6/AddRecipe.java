@@ -41,6 +41,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+// IM/2021/104 Start
 public class AddRecipe extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -69,8 +70,6 @@ public class AddRecipe extends AppCompatActivity {
 
         Spinner category = findViewById(R.id.addRecipe_dropdown_spinner);
 
-
-
         // Get the array from the strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.recipe_category, android.R.layout.simple_spinner_item);
@@ -85,13 +84,11 @@ public class AddRecipe extends AppCompatActivity {
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Handle selection
                 String selectedCategory = parentView.getItemAtPosition(position).toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Do something when nothing selected
             }
         });
 
@@ -113,7 +110,7 @@ public class AddRecipe extends AppCompatActivity {
         duration = findViewById(R.id.addRecipe_AddPreparationTime);
         addBtn = findViewById(R.id.addRecipe_AddBtn);
         cancelBtn = findViewById(R.id.addRecipe_cancelBtn);
-//        category = findViewById(R.id.addRecipe_dropdown_spinner);
+//      category = findViewById(R.id.addRecipe_dropdown_spinner);
 
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -299,3 +296,5 @@ public class AddRecipe extends AppCompatActivity {
         startActivity(new Intent(this, MyRecipe.class));
     }
 }
+
+// IM/2021/104 End

@@ -13,6 +13,8 @@ import androidx.core.splashscreen.SplashScreen;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+// IM/2021/104 Start
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -20,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -47,3 +48,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, SignUp.class));
     }
 }
+
+// IM/2021/104 End

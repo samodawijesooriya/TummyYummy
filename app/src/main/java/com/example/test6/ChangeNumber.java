@@ -42,7 +42,7 @@ public class ChangeNumber extends AppCompatActivity {
     public void ChangeNumberFunc(View view) {
         String newNumber = Number.getText().toString().trim();
 
-        // Validate input
+        // Validations
         if (newNumber.isEmpty()) {
             Number.setError("Number cannot be empty");
             Number.requestFocus();
@@ -57,17 +57,13 @@ public class ChangeNumber extends AppCompatActivity {
             return;
         }
 
-        // Get current user ID
         String userId = mAuth.getCurrentUser().getUid();
 
-        // Update Firebase with the new name
         reference.child(userId).child("mobile").setValue(newNumber).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Success feedback to the user
                 Toast.makeText(ChangeNumber.this, "Mobile Number updated successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, ProfileSettings.class));
             } else {
-                // Failed to update
                 Toast.makeText(ChangeNumber.this, "Failed to update mobile number", Toast.LENGTH_SHORT).show();
             }
         });
@@ -77,3 +73,5 @@ public class ChangeNumber extends AppCompatActivity {
         startActivity(new Intent(this, ProfileSettings.class));
     }
 }
+
+// IM/2021/082 (End)

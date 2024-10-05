@@ -28,13 +28,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+// IM/2021/082 (Start)
+
 public class Category extends AppCompatActivity {
 
     ArrayList<addRecipeClass> recipeList;
     MyAdapter2 myAdapter2;
     RecyclerView recyclerView;
     SearchView searchView;
-    private TextView categoryTitle; // Make sure to add this in your layout XML
+    private TextView categoryTitle;
     DatabaseReference reference;
 
     @Override
@@ -55,24 +57,21 @@ public class Category extends AppCompatActivity {
         searchView = findViewById(R.id.category_searchView);
         searchView.clearFocus();
 
-        // Initialize your recipe list
         recipeList = new ArrayList<>();
         myAdapter2 = new MyAdapter2(Category.this, recipeList);
         recyclerView.setAdapter(myAdapter2);
 
-        // Get the category name from the Intent
+        // Get the category name from the Intent | from Home Activity
         Intent intent = getIntent();
-        String category = intent.getStringExtra("category"); // Get the category passed from Home activity
+        String category = intent.getStringExtra("category");
 
         if (category == null) {
-            category = "All"; // Default to 'All' category
+            category = "All";
         }
 
-        // Optionally, update the UI to show the category title
-        categoryTitle = findViewById(R.id.category_title); // Ensure you have a TextView with this ID in your layout
-        categoryTitle.setText(category); // Set the category title
+        categoryTitle = findViewById(R.id.category_title);
+        categoryTitle.setText(category);
 
-        // Load recipes based on the received category
         loadRecipesByCategory(category);
 
         // Set up TextWatcher for search bar
@@ -92,39 +91,35 @@ public class Category extends AppCompatActivity {
 
     }
 
-    // Method to load recipes based on category
+    // Load recipes based on category
     private void loadRecipesByCategory(String category) {
-        // Reference to the Firebase 'recipes' node
+        // Reference to the Firebase node
         reference = FirebaseDatabase.getInstance().getReference("recipes");
 
-        // Firebase query to filter recipes by category
+        // filter recipes by category
         Query query;
         if (category.equals("All")) {
-            query = reference;  // No filtering, fetch all recipes
+            query = reference;
         } else {
-            query = reference.orderByChild("category").equalTo(category);  // Filter by category
+            query = reference.orderByChild("category").equalTo(category);
         }
 
-        // Use ValueEventListener to get the data from Firebase
+        // Get the data from Firebase
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                recipeList.clear(); // Clear the list before adding new data
+                recipeList.clear();
 
-                // Loop through each recipe in the snapshot
                 for (DataSnapshot recipeSnapshot : dataSnapshot.getChildren()) {
-                    // Assuming addRecipeClass is your model class for recipes
                     addRecipeClass recipe = recipeSnapshot.getValue(addRecipeClass.class);
-                    recipeList.add(recipe);  // Add each recipe to the list
+                    recipeList.add(recipe);
                 }
 
-                // Notify the adapter that data has changed
                 myAdapter2.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle any database errors
             }
         });
     }
@@ -139,9 +134,10 @@ public class Category extends AppCompatActivity {
         myAdapter2.searchDatalist(searchList);
     }
 
-    // Navigation method to go back to home screen
     public void GoHomeFromCategory(View view) {
         startActivity(new Intent(this, Home.class));
     }
 
 }
+
+//IM/2021/082 (End)

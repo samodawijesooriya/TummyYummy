@@ -35,6 +35,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+// IM/2021/082 (Start)
+
 public class ProfilePictureAdd extends AppCompatActivity {
 
     protected FirebaseAuth mAuth;
@@ -142,3 +144,5 @@ public class ProfilePictureAdd extends AppCompatActivity {
         startActivity(new Intent(this, ProfileSettings.class));
     }
 }
+
+// IM/2021/082 (End)
