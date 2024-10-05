@@ -23,6 +23,8 @@ import java.util.ArrayList;
 
 public class MyRecipe extends AppCompatActivity {
 
+    // IM/2021/118 (start)
+    // initialize objects
     GridView gridView;
     ArrayList<addRecipeClass> addRecipeList;
     Adapter1 adapter1;
@@ -39,12 +41,13 @@ public class MyRecipe extends AppCompatActivity {
             return insets;
         });
 
+        // get the items from the xml
         gridView = findViewById(R.id.gridView);
-
         addRecipeList = new ArrayList<>();
         adapter1 = new Adapter1(addRecipeList, this);
         gridView.setAdapter(adapter1);
 
+        // database reference added
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -100,3 +103,5 @@ public class MyRecipe extends AppCompatActivity {
         startActivity(new Intent(this, AddRecipe.class));
     }
 }
+
+// IM/2021/118 (end)

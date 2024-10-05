@@ -18,13 +18,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Date;
 
+// IM/2021/059 (Start)
+// this adpter does not used here because another adapter created for the recycle view
+// create a class for adapter 1
+
 public class Adapter1 extends BaseAdapter {
+    // initialize the variables and objects
     protected FirebaseAuth mAuth;
     private ArrayList<addRecipeClass> addRecipeList;
     private Context context;
     LayoutInflater layoutInflater;
 
-
+    // constructor for the Adapter 1
     public Adapter1(ArrayList<addRecipeClass> addRecipeList, Context context) {
         this.addRecipeList = addRecipeList;
         this.context = context;
@@ -49,6 +54,8 @@ public class Adapter1 extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
+        // set content
         if (layoutInflater == null){
             layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
@@ -56,10 +63,12 @@ public class Adapter1 extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.grid_item, null);
         }
 
+        // get the current User Id
         String currentUserId = mAuth.getCurrentUser().getUid();
         // Get the user ID of the recipe's creator
         String recipeOwnerId = addRecipeList.get(i).getUserId();
 
+        // when onclick go should go to the ViewEditDelete.java
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,4 +97,5 @@ public class Adapter1 extends BaseAdapter {
 
         return view;
     }
+    // IM/2021/059 (end)
 }

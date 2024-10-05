@@ -33,15 +33,17 @@ import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
+    // IM/2021/059 (Start)
+    // define variable and objects
     GridView gridView;
     ArrayList<addRecipeClass> recipeList;
     Adapter1 adapter1;
-
     protected FirebaseAuth mAuth;
     private DatabaseReference reference;
     private String userId;
     private ShapeableImageView profileImageView;
 
+    // oncreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,23 +55,29 @@ public class Home extends AppCompatActivity {
             return insets;
         });
 
+        // creating objects
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         userId = mAuth.getCurrentUser().getUid();
+
+        // geting the items from the xml file
         TextView usernameText = findViewById(R.id.home_username);
         profileImageView = findViewById(R.id.imageView4);
 
+        // refer to the database and retrive the data
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HelperClass userProfile = dataSnapshot.getValue(HelperClass.class);
 
                 if(userProfile != null){
+                    // printing data
                     String user = userProfile.username;
-
                     usernameText.setText("Hi " + user+"!");
 
+                    // check if the imageUrl is null
                     if (userProfile.imgUrl != null) {
+                        // set the image
                         Glide.with(Home.this).load(userProfile.getImgUrl()).into(profileImageView);
                     }
                 }
@@ -99,13 +107,13 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        // Initialize the GridView
+        // Initialize GridView
         gridView = findViewById(R.id.home_gridView);
 
-        // Initialize your recipe list
+        // Initialize recipe list
         recipeList = new ArrayList<>();
 
-        // Set up the adapter and assign it to the GridView
+        // Set up the adapter
         adapter1 = new Adapter1(recipeList, this);
         gridView.setAdapter(adapter1);
 
@@ -117,7 +125,7 @@ public class Home extends AppCompatActivity {
                 recipeList.clear();
                 int count = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if (count >= 2) break; // Limit to 2 recipes
+                    if (count >= 2) break;
 
                     addRecipeClass recipe = snapshot.getValue(addRecipeClass.class);
 
@@ -130,7 +138,7 @@ public class Home extends AppCompatActivity {
                                 count++;
                             }
                         } catch (NumberFormatException e) {
-                            e.printStackTrace(); // Handle exception
+                            e.printStackTrace();
                         }
                     }
                 }
@@ -142,8 +150,8 @@ public class Home extends AppCompatActivity {
             }
         });
 
-//        // Bottom navigation code
-//        // Start here
+        // Bottom navigation code
+        // Start here
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.btnhome);
 
@@ -162,11 +170,6 @@ public class Home extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
-//            } else if (itemId == R.id.history) {
-//                startActivity(new Intent(getApplicationContext(), History.class));
-//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                finish();
-//                return true;
             } else if (itemId == R.id.user) {
                 startActivity(new Intent(getApplicationContext(), UserHome.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -178,6 +181,7 @@ public class Home extends AppCompatActivity {
         // Ends here
     }
 
+    // call the catogory.java file and send the choosen category for category.java
     public void onCategoryClick(View view) {
         Intent intent = new Intent(this, Category.class);
 
@@ -201,10 +205,14 @@ public class Home extends AppCompatActivity {
     }
 
 
+
     public void GoToDesserts(View view) {
         startActivity(new Intent(this, Desserts.class));
     }
+    // IM/2021/059 (end)
 
+    // IM/2021/103 (start)
+    // make the user to stay login in the app
     @Override
     public void onBackPressed() {
         // Show a confirmation dialog before exiting
@@ -218,4 +226,6 @@ public class Home extends AppCompatActivity {
                 .setNegativeButton("No", null)
                 .show();
     }
+
+    // IM/2021/103 (end)
 }

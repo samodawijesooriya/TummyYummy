@@ -8,6 +8,7 @@
     tools:context=".DeleteAccount">
 
 
+<!--    IM/2021/059 (start)-->
     <ImageView
         android:id="@+id/delete_account_backImage"
         android:layout_width="48dp"
@@ -90,3 +91,4 @@
         app:layout_constraintTop_toBottomOf="@+id/delete_account_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--IM/2021/059 - (end)-->

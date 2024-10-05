@@ -24,9 +24,13 @@ import java.util.Objects;
 
 public class DeleteAccount extends AppCompatActivity {
 
+    // IM/2021/059 (start)
+    // Initialize the objects for the firebase
     protected FirebaseAuth mAuth;
     protected FirebaseUser firebaseUser;
 
+
+    // oncreate func
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +42,14 @@ public class DeleteAccount extends AppCompatActivity {
             return insets;
         });
 
+        // delete acc textview get
         TextView deleteAcc = findViewById(R.id.deleteAccount_delete);
 
+        // connection for the firebase
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
+
+        // delete the account from the
         deleteAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

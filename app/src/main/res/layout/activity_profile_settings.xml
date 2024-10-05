@@ -189,6 +189,7 @@
             android:textAlignment="center"
             android:textSize="20sp" />
 
+
         <ImageView
             android:id="@+id/arrow_Email"
             android:layout_width="35dp"

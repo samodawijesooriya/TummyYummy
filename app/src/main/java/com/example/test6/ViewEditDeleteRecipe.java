@@ -42,6 +42,8 @@ import java.util.Objects;
 
 public class ViewEditDeleteRecipe extends AppCompatActivity {
 
+    // IM/2021/059 (start)
+    // define the objects
     private String recipeId;
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
@@ -65,6 +67,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             return insets;
         });
 
+        // get items from the XML
         Button edit = findViewById(R.id.editViewRecipe_EditBtn);
         recipeName = findViewById(R.id.ViewEditDelete_RecipeName);
         ingredientsView = findViewById(R.id.recipeView_Ingredients);
@@ -72,10 +75,12 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
         videoView = findViewById(R.id.ViewEditDelete_videoView);
         backBtn = findViewById(R.id.ViewEditDelete_backBtn);
 
+        // initialize the objects
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("recipes");
         recipeId = getIntent().getStringExtra("recipeId");
 
+        // edit buttom set on click listner
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +90,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             }
         });
 
+        // back btn setOnClickListener
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,8 +99,10 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             }
         });
 
+        // when button delete pressed
         Button deleteRecipeBtn = findViewById(R.id.editViewRecipe_DeleteBtn);
 
+        // delete btn func
         deleteRecipeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +179,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             }
         });
 
-
+        // set the the review image
         ImageView reviewImage = findViewById(R.id.ReviewImage);
 
         reviewImage.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +214,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
         }
     }
 
+    // set the video view
     private void setVideo(String videoUrl) {
         VideoView videoView = findViewById(R.id.ViewEditDelete_videoView);
         if (videoUrl != null && !videoUrl.isEmpty()) {
@@ -224,6 +233,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
         }
     }
 
+    // show popup view for the ratings
     private void showReviewPopup() {
         // Create the popup window for adding and viewing reviews
         View popupView = getLayoutInflater().inflate(R.layout.popup_review, null);
@@ -289,6 +299,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
         });
     }
 
+    // submit the review func
     private void submitReview(String reviewText, float rating) {
         DatabaseReference reviewsRef = reference.child(recipeId).child("reviews");
         String reviewId = reviewsRef.push().getKey();
@@ -304,3 +315,4 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
         });
     }
 }
+// IM/2021/059 (end)

@@ -9,6 +9,7 @@
     android:gravity="start"
     android:padding="20dp">
 
+<!--    IM/2021/103 (start)-->
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="150dp"
@@ -50,3 +51,4 @@
 
 
 </LinearLayout>
+<!--IM/2021/103 (end)-->
