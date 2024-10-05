@@ -43,11 +43,11 @@ public class Favourites extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.fav) {
                 return true;
-            } else if (itemId == R.id.history) {
-                startActivity(new Intent(getApplicationContext(), History.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
+//            } else if (itemId == R.id.history) {
+//                startActivity(new Intent(getApplicationContext(), History.class));
+//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                finish();
+//                return true;
             } else if (itemId == R.id.user) {
                 startActivity(new Intent(getApplicationContext(), UserHome.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

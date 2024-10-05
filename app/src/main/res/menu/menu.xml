@@ -7,9 +7,9 @@
         android:icon="@drawable/fav"
         android:title="favourite"
         />
-    <item android:id="@+id/history"
-        android:icon="@drawable/clock"
-        android:title="history"/>
+<!--    <item android:id="@+id/history"-->
+<!--        android:icon="@drawable/clock"-->
+<!--        android:title="history"/>-->
     <item android:id="@+id/btnedit"
         android:icon="@drawable/edit"
         android:title="edit"/>

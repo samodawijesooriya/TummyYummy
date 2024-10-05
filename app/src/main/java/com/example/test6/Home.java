@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class Home extends AppCompatActivity {
+
+    GridView gridView;
+    ArrayList<addRecipeClass> recipeList;
+    Adapter1 adapter1;
 
     protected FirebaseAuth mAuth;
     private DatabaseReference reference;
@@ -40,8 +47,6 @@ public class Home extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
 
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
@@ -78,6 +83,49 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        // Initialize the GridView
+        gridView = findViewById(R.id.home_gridView);
+
+        // Initialize your recipe list
+        recipeList = new ArrayList<>();
+
+        // Set up the adapter and assign it to the GridView
+        adapter1 = new Adapter1(recipeList, this);
+        gridView.setAdapter(adapter1);
+
+        // Fetch only recipes with duration <= 20 minutes and limit the result to 2
+        DatabaseReference recipeReference = FirebaseDatabase.getInstance().getReference("recipes");
+        recipeReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                recipeList.clear();
+                int count = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (count >= 2) break; // Limit to 2 recipes
+
+                    addRecipeClass recipe = snapshot.getValue(addRecipeClass.class);
+
+                    // Check if duration is <= 20
+                    if (recipe != null && recipe.getDuration() != null) {
+                        try {
+                            int durationInMinutes = Integer.parseInt(recipe.getDuration().replaceAll("[^0-9]", ""));
+                            if (durationInMinutes <= 20) {
+                                recipeList.add(recipe);
+                                count++;
+                            }
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace(); // Handle exception
+                        }
+                    }
+                }
+                adapter1.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Home.this, "Failed to load recipes", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 //        // Bottom navigation code
 //        // Start here
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -98,11 +146,11 @@ public class Home extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
-            } else if (itemId == R.id.history) {
-                startActivity(new Intent(getApplicationContext(), History.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
+//            } else if (itemId == R.id.history) {
+//                startActivity(new Intent(getApplicationContext(), History.class));
+//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                finish();
+//                return true;
             } else if (itemId == R.id.user) {
                 startActivity(new Intent(getApplicationContext(), UserHome.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

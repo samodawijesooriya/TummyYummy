@@ -273,7 +273,6 @@
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:backgroundTint="#FCFCFF"
-        android:onClick="GoBackToMyRecipe"
         android:text="Cancel"
         android:textColor="#000053"
         app:layout_constraintEnd_toEndOf="parent"

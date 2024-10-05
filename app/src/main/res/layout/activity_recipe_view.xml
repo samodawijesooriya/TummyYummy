@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/BackBtn"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.093"
@@ -31,10 +31,10 @@
 
     <ImageView
         android:id="@+id/HeartImage"
-        android:layout_width="38dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="100dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="104dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fav" />
@@ -49,9 +49,9 @@
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.572"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webView" />
+        app:layout_constraintTop_toBottomOf="@+id/RecipeView_videoView" />
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -159,8 +159,8 @@
 
     <ImageView
         android:id="@+id/shareIcon"
-        android:layout_width="33dp"
-        android:layout_height="38dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.863"

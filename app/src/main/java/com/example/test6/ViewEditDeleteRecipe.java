@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
     private TextView recipeName;
+    private ImageView backBtn;
     private TextView ingredientsView;
     private TextView methodView;
     private addRecipeClass currentRecipe;// Store the current recipe data
@@ -56,6 +58,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
         ingredientsView = findViewById(R.id.recipeView_Ingredients);
         methodView = findViewById(R.id.recipeView_Method);
         videoView = findViewById(R.id.ViewEditDelete_videoView);
+        backBtn = findViewById(R.id.ViewEditDelete_backBtn);
 
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("recipes");
@@ -66,6 +69,14 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ViewEditDeleteRecipe.this, EditRecipe.class);
                 intent.putExtra("recipeId", recipeId);
+                startActivity(intent);
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewEditDeleteRecipe.this, Category.class);
                 startActivity(intent);
             }
         });

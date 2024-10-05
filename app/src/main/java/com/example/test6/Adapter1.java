@@ -13,12 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Adapter1 extends BaseAdapter {
-
+    protected FirebaseAuth mAuth;
     private ArrayList<addRecipeClass> addRecipeList;
     private Context context;
     LayoutInflater layoutInflater;
@@ -27,6 +28,8 @@ public class Adapter1 extends BaseAdapter {
     public Adapter1(ArrayList<addRecipeClass> addRecipeList, Context context) {
         this.addRecipeList = addRecipeList;
         this.context = context;
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
 
@@ -56,14 +59,13 @@ public class Adapter1 extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.grid_item, null);
         }
 
+        String currentUserId = mAuth.getCurrentUser().getUid();
+        // Get the user ID of the recipe's creator
+        String recipeOwnerId = addRecipeList.get(i).getUserId();
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String currentUserId = addRecipeList.get(i).getUserId();
-                // Get the user ID of the recipe's creator
-                String recipeOwnerId = addRecipeList.get(i).getUserId();
-
-//                Intent intent = new Intent(context, RecipeView.class);
                 Intent intent;
                 if (currentUserId.equals(recipeOwnerId)) {
                     // If the current user is the owner of the recipe, go to EditRecipeView

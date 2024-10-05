@@ -14,10 +14,11 @@
         android:layout_height="303dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="452dp"
+        android:layout_marginBottom="492dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rectangle" />
 
     <ImageView
@@ -209,131 +210,141 @@
 
     </HorizontalScrollView>
 
+    <!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/CardView1"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="140dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        app:cardCornerRadius="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.511"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/QuickAndEasyText">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/QuickImg1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            app:srcCompat="@drawable/chipcookie" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/videoDuration1"-->
+<!--            android:layout_width="80dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="0dp"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:background="@drawable/round_corner_video_duration"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:text="30 min"-->
+<!--            android:textColor="#FCFCFF"-->
+<!--            android:textSize="18sp" />-->
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/CardView1Text"-->
+<!--        android:layout_width="273dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:fontFamily="@font/montserrat"-->
+<!--        android:text="• Chocolate Chip Cookie"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.282"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/CardView1" />-->
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/CardView2"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="140dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        app:cardCornerRadius="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/CardView1Text">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/QuickImg2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            app:srcCompat="@drawable/shrimpsalad1" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/videoDuration2"-->
+<!--            android:layout_width="80dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="0dp"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:background="@drawable/round_corner_video_duration"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:text="40 min"-->
+<!--            android:textColor="#FCFCFF"-->
+<!--            android:textSize="18sp" />-->
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/CardView2Text"-->
+<!--        android:layout_width="273dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:fontFamily="@font/montserrat"-->
+<!--        android:text="• Shrimp Salad"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.282"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/CardView2" />-->
+
     <TextView
         android:id="@+id/QuickAndEasyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
         android:text="Quick And Easy"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CardView1"
-        android:layout_width="350dp"
-        android:layout_height="140dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="3dp"
-        app:cardCornerRadius="16dp"
+    <GridView
+        android:id="@+id/home_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_marginTop="48dp"
+        android:numColumns="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QuickAndEasyText">
-
-        <ImageView
-            android:id="@+id/QuickImg1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/chipcookie" />
-
-        <TextView
-            android:id="@+id/videoDuration1"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/round_corner_video_duration"
-            android:fontFamily="@font/montserrat"
-            android:paddingLeft="10dp"
-            android:text="30 min"
-            android:textColor="#FCFCFF"
-            android:textSize="18sp" />
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/CardView1Text"
-        android:layout_width="273dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat"
-        android:text="• Chocolate Chip Cookie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.282"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CardView1" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CardView2"
-        android:layout_width="350dp"
-        android:layout_height="140dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CardView1Text">
-
-        <ImageView
-            android:id="@+id/QuickImg2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/shrimpsalad1" />
-
-        <TextView
-            android:id="@+id/videoDuration2"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/round_corner_video_duration"
-            android:fontFamily="@font/montserrat"
-            android:paddingLeft="10dp"
-            android:text="40 min"
-            android:textColor="#FCFCFF"
-            android:textSize="18sp" />
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/CardView2Text"
-        android:layout_width="273dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/montserrat"
-        android:text="• Shrimp Salad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.282"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CardView2" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/bottom_background"
         android:elevation="2dp"
         app:itemIconSize="30dp"
@@ -341,9 +352,10 @@
         app:itemTextColor="#ffff11"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CardView2Text"
+        app:layout_constraintTop_toBottomOf="@+id/home_gridView"
+        app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/menu" />
 
 

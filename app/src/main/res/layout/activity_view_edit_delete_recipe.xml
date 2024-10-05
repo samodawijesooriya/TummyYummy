@@ -7,21 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".ViewEditDeleteRecipe">
 
+    <!-- Edit Button -->
+
+    <!-- Delete Button -->
+
     <ImageView
-        android:id="@+id/BackBtn"
+        android:id="@+id/ViewEditDelete_backBtn"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
-        android:onClick="GoBackToDesserts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back" />
 
-    <!-- Edit Button -->
-
-    <!-- Delete Button -->
+    <Button
+        android:id="@+id/editViewRecipe_EditBtn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:backgroundTint="#000053"
+        android:text="Edit"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.173" />
 
     <Button
         android:id="@+id/editViewRecipe_CancelBtn"
@@ -33,33 +46,19 @@
         android:textColor="#000053"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toEndOf="@+id/editViewRecipe_EditBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.174"
         app:strokeColor="#000053"
         app:strokeWidth="2dp" />
 
-    <Button
-        android:id="@+id/editViewRecipe_EditBtn"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:backgroundTint="#000053"
-        android:text="Edit"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174" />
-
     <ImageView
         android:id="@+id/HeartImage"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="88dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/fav" />
@@ -68,13 +67,14 @@
         android:id="@+id/shareIcon"
         android:layout_width="33dp"
         android:layout_height="38dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="shareRecipe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.863"
-        app:layout_constraintStart_toEndOf="@+id/BackBtn"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ViewEditDelete_backBtn"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/share"
-        android:onClick="shareRecipe" />
+        app:srcCompat="@drawable/share" />
 
     <VideoView
         android:id="@+id/ViewEditDelete_videoView"
@@ -90,31 +90,33 @@
         android:id="@+id/ViewEditDelete_RecipeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
-        android:text="Rasberry Pie"
+        android:text="Recipe Name"
         android:textSize="25dp"
+        android:gravity="center"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webView" />
+        app:layout_constraintTop_toBottomOf="@+id/ViewEditDelete_videoView" />
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="395dp"
-        android:layout_height="292dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="396dp"
+        android:layout_height="326dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RecipeName">
+        app:layout_constraintTop_toBottomOf="@+id/ViewEditDelete_RecipeName">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingStart="20dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="20dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/CardView1inRecipeView"
@@ -152,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="Ingredients Go Here"
+                        android:text="No Ingredients"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -195,7 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="• Method Goes Here"
+                        android:text="No method"
                         android:textSize="15sp" />
 
                 </LinearLayout>

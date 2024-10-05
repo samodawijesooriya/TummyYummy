@@ -21,9 +21,9 @@ public class GridItem extends AppCompatActivity {
     }
 
     // This method is triggered when the ImageView is clicked
-    public void GoToRecipeView(View view) {
-        // Navigate to another activity
-        Intent intent = new Intent(GridItem.this, History.class);
-        startActivity(intent);
-    }
+//    public void GoToRecipeView(View view) {
+//        // Navigate to another activity
+//        Intent intent = new Intent(GridItem.this, History.class);
+//        startActivity(intent);
+//    }
 }

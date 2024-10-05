@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Category extends AppCompatActivity {
+
     GridView gridView;
     ArrayList<addRecipeClass> recipeList;
     Adapter1 adapter1;

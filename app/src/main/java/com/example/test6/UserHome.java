@@ -94,11 +94,11 @@ public class UserHome extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
-            } else if (itemId == R.id.history) {
-                startActivity(new Intent(getApplicationContext(), History.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
+//            } else if (itemId == R.id.history) {
+//                startActivity(new Intent(getApplicationContext(), History.class));
+//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                finish();
+//                return true;
             } else if (itemId == R.id.user) {
                 return true;
             }

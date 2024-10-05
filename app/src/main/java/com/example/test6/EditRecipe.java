@@ -206,6 +206,14 @@ public class EditRecipe extends AppCompatActivity {
             }
         });
 
+        editCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(EditRecipe.this, ViewEditDeleteRecipe.class));
+                finish();
+            }
+        });
+
 
         // Get the array from the strings.xml
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
