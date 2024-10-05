@@ -40,13 +40,13 @@
         android:id="@+id/change_number_textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="156dp"
         android:fontFamily="@font/montserrat"
         android:text="Enter your phone number"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/change_number_backImage" />
 
@@ -57,7 +57,8 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/roundcorner"
         android:ems="10"
-        android:hint="    Telephone Number"
+        android:paddingStart="20dp"
+        android:hint="Telephone Number"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
@@ -71,8 +72,16 @@
         android:layout_marginTop="136dp"
         android:fontFamily="@font/montserrat"
         android:text="Save"
+        android:textColor="@color/white"
+        android:onClick="ChangeNumberFunc"
         android:textSize="24sp"
+        android:gravity="center"
+        android:backgroundTint="#000053"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/change_number_editTextPhone"
-        tools:layout_editor_absoluteX="139dp" />
+        app:layout_constraintVertical_bias="0.148" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

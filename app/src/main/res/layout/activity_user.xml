@@ -15,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="104dp"
         android:scaleType="centerCrop"
+        android:onClick="GoToTheAddProfilePicture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,13 +31,12 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/montserrat"
+        android:gravity="center"
         android:onClick="GoToUserProfileSettings"
-        android:text="It's Mathee"
-
+        android:text="Username"
         android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_profileImage" />
 
     <Button
@@ -74,6 +74,7 @@
         android:onClick="AboutUs"
         android:paddingLeft="20dp"
         android:text="About Us"
+        android:textAlignment="center"
         android:textSize="15sp"
         app:cornerRadius="30dp"
         app:icon="@android:drawable/ic_dialog_info"
@@ -107,6 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:onClick="GoToUserProfileSettings"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="116dp"
         app:layout_constraintEnd_toEndOf="parent"

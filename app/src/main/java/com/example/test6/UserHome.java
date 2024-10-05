@@ -34,6 +34,7 @@ public class UserHome extends AppCompatActivity {
     protected FirebaseAuth mAuth;
     private DatabaseReference reference;
     private String userId;
+    private ImageView ProfileImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class UserHome extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("users");
         userId = mAuth.getCurrentUser().getUid();
         TextView usernameText = findViewById(R.id.UserNameShow);
+        ProfileImg = findViewById(R.id.user_profileImage);
 
 
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -60,8 +62,11 @@ public class UserHome extends AppCompatActivity {
                 if(userProfile != null){
                     String user = userProfile.username;
                     usernameText.setText(user);
-
+                    if (userProfile.imgUrl != null) {
+                        Glide.with(UserHome.this).load(userProfile.getImgUrl()).into(ProfileImg);
+                    }
                 }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -113,5 +118,9 @@ public class UserHome extends AppCompatActivity {
 
     public void GoToUserProfileSettings(View view) {
         startActivity(new Intent(this, ProfileSettings.class));
+    }
+
+    public void GoToTheAddProfilePicture(View view) {
+        startActivity(new Intent(this, ProfilePictureAdd.class));
     }
 }

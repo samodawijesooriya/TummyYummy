@@ -18,7 +18,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +40,7 @@ public class Home extends AppCompatActivity {
     protected FirebaseAuth mAuth;
     private DatabaseReference reference;
     private String userId;
+    private ShapeableImageView profileImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class Home extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("users");
         userId = mAuth.getCurrentUser().getUid();
         TextView usernameText = findViewById(R.id.home_username);
+        profileImageView = findViewById(R.id.imageView4);
 
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -64,6 +68,10 @@ public class Home extends AppCompatActivity {
                     String user = userProfile.username;
 
                     usernameText.setText("Hi " + user+"!");
+
+                    if (userProfile.imgUrl != null) {
+                        Glide.with(Home.this).load(userProfile.getImgUrl()).into(profileImageView);
+                    }
                 }
             }
 

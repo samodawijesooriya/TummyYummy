@@ -6,6 +6,15 @@ public class HelperClass {
     String email;
     String password;
     String imgUrl;
+    String mobile;
+
+    public HelperClass(String username, String email, String password, String imgUrl, String mobile) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.imgUrl = imgUrl;
+        this.mobile = mobile;
+    }
 
     public HelperClass(String username, String email, String password, String imgUrl) {
         this.username = username;
@@ -46,5 +55,21 @@ public class HelperClass {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

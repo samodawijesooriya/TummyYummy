@@ -19,30 +19,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back" />
 
-    <EditText
-        android:id="@+id/change_name_editTextTextLastName"
-        android:layout_width="345dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/roundcorner"
-        android:ems="10"
-        android:hint="    Last Name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.355"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/change_name_textView1" />
-
-    <TextView
-        android:id="@+id/change_name_textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
-        android:text="Last Name"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="324dp" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -54,18 +30,20 @@
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.298"
-        app:layout_constraintStart_toEndOf="@+id/change_name_imageView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
         android:fontFamily="@font/montserrat"
-        android:text="First Name"
+        android:text="Name"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="166dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_name_backbutton" />
 
     <EditText
         android:id="@+id/editTextTextFirstName"
@@ -74,26 +52,28 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/roundcorner"
         android:ems="10"
-        android:hint="    First Name"
+        android:paddingLeft="20dp"
+        android:hint="Username"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.355"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <TextView
+    <Button
         android:id="@+id/textView3"
         android:layout_width="120dp"
         android:layout_height="57dp"
-        android:layout_marginTop="76dp"
-        android:background="@drawable/roundcorner2"
+        android:backgroundTint="#000053"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
-        android:onClick=""
+        android:onClick="ChangeNameFunc"
         android:text="Save"
         android:textColor="#FCFCFF"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/change_name_editTextTextLastName"
-        tools:layout_editor_absoluteX="136dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextFirstName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
