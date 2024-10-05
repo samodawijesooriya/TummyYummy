@@ -32,9 +32,6 @@ public class Adapter1 extends BaseAdapter {
         mAuth = FirebaseAuth.getInstance();
     }
 
-
-
-
     @Override
     public int getCount() {
         return addRecipeList.size();

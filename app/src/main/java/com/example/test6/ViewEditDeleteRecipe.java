@@ -1,5 +1,6 @@
 package com.example.test6;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,12 +15,16 @@ import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +32,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.Objects;
 
 public class ViewEditDeleteRecipe extends AppCompatActivity {
 
@@ -37,7 +44,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
     private ImageView backBtn;
     private TextView ingredientsView;
     private TextView methodView;
-    private addRecipeClass currentRecipe;// Store the current recipe data
+    private addRecipeClass currentRecipe1;// Store the current recipe data
     private VideoView videoView;
     final private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
@@ -81,24 +88,72 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             }
         });
 
+        Button deleteRecipeBtn = findViewById(R.id.editViewRecipe_DeleteBtn);
+
+        deleteRecipeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ViewEditDeleteRecipe.this);
+                dialog.setTitle("Delete Recipe?");
+                dialog.setMessage("Deleting this Recipe will completely removing your "+
+                        "this recipe from the system and you won't be able to access them.");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AlertDialog progressDialog = new AlertDialog.Builder(ViewEditDeleteRecipe.this)
+                                .setView(R.layout.dialog_progress) // Use the custom layout
+                                .setCancelable(false) // Prevent cancellation
+                                .create();
+
+                        progressDialog.show();
+
+                        reference.child(recipeId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                progressDialog.dismiss();
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(ViewEditDeleteRecipe.this, "Recipe Deleted", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(ViewEditDeleteRecipe.this, Category.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(ViewEditDeleteRecipe.this,
+                                            Objects.requireNonNull(task.getException()).getMessage(),
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
+                });
+                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+            }
+        });
+
 
         // Fetch recipe details from the database
         reference.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentRecipe = dataSnapshot.getValue(addRecipeClass.class);
+                currentRecipe1 = dataSnapshot.getValue(addRecipeClass.class);
 
-                if (currentRecipe != null) {
-                    String Name = currentRecipe.getName();
-                    String ingredients = currentRecipe.getIngredients();
-                    String method = currentRecipe.getMethod();
+                if (currentRecipe1 != null) {
+                    String Name = currentRecipe1.getName();
+                    String ingredients = currentRecipe1.getIngredients();
+                    String method = currentRecipe1.getMethod();
 
 
                     recipeName.setText(Name);
                     ingredientsView.setText(ingredients);
                     methodView.setText(method);
 
-                    String videoUrlnew = currentRecipe.getVideoUrl();
+                    String videoUrlnew = currentRecipe1.getVideoUrl();
                     setVideo(videoUrlnew);
                 } else {
                     Toast.makeText(ViewEditDeleteRecipe.this, "No data", Toast.LENGTH_LONG).show();
@@ -111,17 +166,15 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     // Method to share the recipe when the share button is clicked
     public void shareRecipe(View view) {
-        if (currentRecipe != null) {
+        if (currentRecipe1 != null) {
             // Format the recipe details for sharing
-            String shareText = "Check out this amazing recipe: " + currentRecipe.getName() + "!\n\n" +
-                    "Ingredients:\n" + currentRecipe.getIngredients() + "\n\n" +
-                    "Method:\n" + currentRecipe.getMethod();
+            String shareText = "Check out this amazing recipe: " + currentRecipe1.getName() + "!\n\n" +
+                    "Ingredients:\n" + currentRecipe1.getIngredients() + "\n\n" +
+                    "Method:\n" + currentRecipe1.getMethod();
 
             // Create the share intent
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -129,7 +182,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
 
             // Optionally add a subject (used in email clients, etc.)
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Delicious " + currentRecipe.getName() + " Recipe");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Delicious " + currentRecipe1.getName() + " Recipe");
 
             // Show the sharing options
             startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));

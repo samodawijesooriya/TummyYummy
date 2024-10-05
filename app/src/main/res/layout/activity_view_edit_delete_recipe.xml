@@ -37,11 +37,10 @@
         app:layout_constraintVertical_bias="0.173" />
 
     <Button
-        android:id="@+id/editViewRecipe_CancelBtn"
+        android:id="@+id/editViewRecipe_DeleteBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:backgroundTint="#FCFCFF"
-        android:onClick="GoBackToMyRecipe"
         android:text="Delete"
         android:textColor="#000053"
         app:layout_constraintBottom_toBottomOf="parent"
