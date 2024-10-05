@@ -1,3 +1,4 @@
+//IM/2021/103 Start
 package com.example.test6;
 
 import android.content.Intent;
@@ -23,8 +24,7 @@ public class Favourites extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //        // Bottom navigation code
-//        // Start here
+        // Bottom navigation code
         BottomNavigationView bottomNavigationView = findViewById(R.id.favourites_bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.fav);
 
@@ -43,11 +43,7 @@ public class Favourites extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.fav) {
                 return true;
-//            } else if (itemId == R.id.history) {
-//                startActivity(new Intent(getApplicationContext(), History.class));
-//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                finish();
-//                return true;
+
             } else if (itemId == R.id.user) {
                 startActivity(new Intent(getApplicationContext(), UserHome.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -56,6 +52,6 @@ public class Favourites extends AppCompatActivity {
             }
             return false;
         });
-        // Ends here
     }
 }
+//IM/2021/103 End
