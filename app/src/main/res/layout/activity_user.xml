@@ -85,18 +85,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helpSupport" />
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:background="@drawable/bottom_background"
         android:elevation="2dp"
-        app:itemIconSize="30dp"
-        app:itemIconTint="#FFFFFF"
+        android:gravity="bottom"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        app:itemIconSize="24dp"
         app:itemTextColor="@color/white"
-        app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="selected"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
