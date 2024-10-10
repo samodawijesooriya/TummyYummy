@@ -146,7 +146,6 @@ public class AddRecipe extends AppCompatActivity {
                 }
         );
 
-
         uploadVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

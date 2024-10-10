@@ -11,6 +11,7 @@ public class addRecipeClass {
     String userId;
     String imgUrl;
     String videoUrl;
+    boolean favorite;
 
 
 
@@ -24,6 +25,19 @@ public class addRecipeClass {
         this.userId = userId;
     }
 
+    // constructor with all parameters
+    public addRecipeClass(String recipeID, String name, String ingredients, String method, String duration, String category, String userId, String imgUrl, String videoUrl, boolean favorite) {
+        this.recipeID = recipeID;
+        this.name = name;
+        this.ingredients = ingredients;
+        this.method = method;
+        this.duration = duration;
+        this.category = category;
+        this.userId = userId;
+        this.imgUrl = imgUrl;
+        this.videoUrl = videoUrl;
+        this.favorite = favorite;
+    }
 
     public addRecipeClass(String recipeID, String name, String ingredients, String method, String duration, String category) {
         this.recipeID = recipeID;
@@ -106,6 +120,14 @@ public class addRecipeClass {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.test6;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,6 +27,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +40,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,11 +48,12 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
 
     // IM/2021/059 (start)
     // define the objects
+    boolean isInMyFavorite = false;
     private String recipeId;
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
     private TextView recipeName;
-    private ImageView backBtn;
+    private ImageView backBtn, Bookmark;
     private TextView ingredientsView;
     private TextView methodView;
     private addRecipeClass currentRecipe;// Store the current recipe data
@@ -74,11 +79,31 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
         methodView = findViewById(R.id.recipeView_Method);
         videoView = findViewById(R.id.ViewEditDelete_videoView);
         backBtn = findViewById(R.id.ViewEditDelete_backBtn);
+        Bookmark = findViewById(R.id.BookmarkBorder);
 
         // initialize the objects
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("recipes");
         recipeId = getIntent().getStringExtra("recipeId");
+
+        if (mAuth.getCurrentUser() != null){
+            checkIsFavorite();
+        }
+
+        Bookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mAuth.getCurrentUser() == null){
+                    Toast.makeText(ViewEditDeleteRecipe.this, "You are not logged in", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(isInMyFavorite){
+                        removeFromFavorites(ViewEditDeleteRecipe.this, recipeId);
+                    }else{
+                        addToFavorite(ViewEditDeleteRecipe.this, recipeId);
+                    }
+                }
+            }
+        });
 
         // edit buttom set on click listner
         edit.setOnClickListener(new View.OnClickListener() {
@@ -313,6 +338,76 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
                 Toast.makeText(ViewEditDeleteRecipe.this, "Failed to submit review", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    public static void addToFavorite(Context context, String recipeId){
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() == null){
+            Toast.makeText(context, "No user", Toast.LENGTH_SHORT).show();
+        }else{
+            long timestamp = System.currentTimeMillis();
+
+            HashMap<String, Object> hashmap = new HashMap<>();
+            hashmap.put("recipeId", ""+recipeId);
+            hashmap.put("timestamp", ""+timestamp);
+
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+            ref.child(firebaseAuth.getUid()).child("favorite").child(recipeId).setValue(hashmap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(context, "Added to your favorites list...", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "Failed to add to favorites due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+    public static void removeFromFavorites (Context context, String recipeId){
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() == null){
+            Toast.makeText(context, "No user", Toast.LENGTH_SHORT).show();
+        }else{
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+            ref.child(firebaseAuth.getUid()).child("favorite").child(recipeId)
+                    .removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(context, "Removed your favorites list...", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "Failed to remove to favorites due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void checkIsFavorite(){
+        DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("users");
+        referenceUser.child(mAuth.getUid()).child("favorite").child(recipeId)
+            .addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    isInMyFavorite = dataSnapshot.exists();
+                    if(isInMyFavorite){
+                        Bookmark.setImageResource(R.drawable.baseline_bookmark_24);
+                    }else{
+                        Bookmark.setImageResource(R.drawable.baseline_bookmark_border_24);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
     }
 }
 // IM/2021/059 (end)

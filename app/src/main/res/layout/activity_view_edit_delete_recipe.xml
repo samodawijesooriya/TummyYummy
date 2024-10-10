@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toEndOf="@+id/editViewRecipe_EditBtn"
-        app:layout_constraintTop_toBottomOf="@+id/HeartImage"
+        app:layout_constraintTop_toBottomOf="@+id/BookmarkBorder"
         app:strokeColor="#000053"
         app:strokeWidth="2dp" />
 
@@ -57,21 +57,21 @@
         android:layout_width="48dp"
         android:layout_height="40dp"
         android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/HeartImage"
+        app:layout_constraintEnd_toStartOf="@+id/BookmarkBorder"
         app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toEndOf="@+id/ViewEditDelete_backBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_rate_review_24" />
 
     <ImageView
-        android:id="@+id/HeartImage"
+        android:id="@+id/BookmarkBorder"
         android:layout_width="48dp"
         android:layout_height="40dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fav" />
+        app:srcCompat="@drawable/baseline_bookmark_border_24" />
 
     <ImageView
         android:id="@+id/shareIcon"

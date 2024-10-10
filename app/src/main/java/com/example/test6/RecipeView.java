@@ -2,10 +2,12 @@
 
 package com.example.test6;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,9 +32,11 @@ import com.google.firebase.storage.StorageReference;
 
 public class RecipeView extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    boolean isInMyFavorite = false;
     private DatabaseReference reference;
     private String recipeId;
     private TextView recipeName;
+    private ImageView heartImage;
     private TextView ingredientsView;
     private TextView methodView;
     private addRecipeClass currentRecipe;// Store the current recipe data
@@ -54,12 +58,11 @@ public class RecipeView extends AppCompatActivity {
         ingredientsView = findViewById(R.id.recipeView_Ingredients);
         methodView = findViewById(R.id.recipeView_Method);
         videoView = findViewById(R.id.RecipeView_videoView);
+        heartImage = findViewById(R.id.bookmark);
 
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("recipes");
         recipeId = getIntent().getStringExtra("recipeId");
-
-
 
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(videoView);
