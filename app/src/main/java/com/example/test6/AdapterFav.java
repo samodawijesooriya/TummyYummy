@@ -84,6 +84,8 @@ public class AdapterFav extends RecyclerView.Adapter<AdapterFav.HolderRecipeFav>
                 holder.recycleText.setText(recipeName);
                 holder.recycleDuration.setText(recipeDuration);
 
+                // Load the image
+                Glide.with(context).load(recipeImgUrl).into(holder.recycleImage);
             }
 
             @Override

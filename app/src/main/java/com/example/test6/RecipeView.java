@@ -58,7 +58,7 @@ public class RecipeView extends AppCompatActivity {
         ingredientsView = findViewById(R.id.recipeView_Ingredients);
         methodView = findViewById(R.id.recipeView_Method);
         videoView = findViewById(R.id.RecipeView_videoView);
-        heartImage = findViewById(R.id.bookmark);
+        heartImage = findViewById(R.id.recipeViewBookmarkBorder);
 
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("recipes");

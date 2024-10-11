@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@+id/BookmarkBorder"
+        android:id="@+id/recipeViewBookmarkBorder"
         android:layout_width="48dp"
         android:layout_height="40dp"
         android:layout_marginTop="44dp"
@@ -44,7 +44,7 @@
         android:layout_width="48dp"
         android:layout_height="40dp"
         android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/BookmarkBorder"
+        app:layout_constraintEnd_toStartOf="@+id/recipeViewBookmarkBorder"
         app:layout_constraintHorizontal_bias="0.928"
         app:layout_constraintStart_toEndOf="@+id/BackBtn"
         app:layout_constraintTop_toTopOf="parent"
