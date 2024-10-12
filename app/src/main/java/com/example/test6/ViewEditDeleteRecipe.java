@@ -259,7 +259,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
     }
 
     // show popup view for the ratings
-    private void showReviewPopup() {
+    public void showReviewPopup() {
         // Create the popup window for adding and viewing reviews
         View popupView = getLayoutInflater().inflate(R.layout.popup_review, null);
         final android.widget.PopupWindow popupWindow = new android.widget.PopupWindow(popupView,
@@ -303,7 +303,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
         popupWindow.showAtLocation(findViewById(R.id.main), android.view.Gravity.CENTER, 0, 0);
     }
 
-    private void loadPastReviews(List<Review> reviewsList, ReviewAdapter adapter) {
+    public void loadPastReviews(List<Review> reviewsList, ReviewAdapter adapter) {
         DatabaseReference reviewsRef = reference.child(recipeId).child("reviews");
 
         reviewsRef.addValueEventListener(new ValueEventListener() {
@@ -325,7 +325,7 @@ public class ViewEditDeleteRecipe extends AppCompatActivity {
     }
 
     // submit the review func
-    private void submitReview(String reviewText, float rating) {
+    public void submitReview(String reviewText, float rating) {
         DatabaseReference reviewsRef = reference.child(recipeId).child("reviews");
         String reviewId = reviewsRef.push().getKey();
 

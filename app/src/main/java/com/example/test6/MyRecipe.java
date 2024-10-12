@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,7 @@ public class MyRecipe extends AppCompatActivity {
     // IM/2021/118 (start)
     // initialize objects
     GridView gridView;
+    protected FirebaseAuth mAuth;
     ArrayList<addRecipeClass> addRecipeList;
     Adapter1 adapter1, searchAdapter;
     SearchView searchView;
@@ -43,14 +46,17 @@ public class MyRecipe extends AppCompatActivity {
             return insets;
         });
 
+        mAuth = FirebaseAuth.getInstance();
+        String currentUserId = mAuth.getCurrentUser().getUid();
+
         // get the items from the xml
         gridView = findViewById(R.id.gridView);
         addRecipeList = new ArrayList<>();
         adapter1 = new Adapter1(addRecipeList, this);
         gridView.setAdapter(adapter1);
-
         searchView = findViewById(R.id.my_recipe_searchView);
         searchView.clearFocus();
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -70,11 +76,19 @@ public class MyRecipe extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                addRecipeList.clear();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                    addRecipeClass addRecipeClass = dataSnapshot1.getValue(com.example.test6.addRecipeClass.class);
-                    addRecipeList.add(addRecipeClass);
+                    addRecipeClass addRecipeClass = dataSnapshot1.getValue(addRecipeClass.class);
+
+                    if (addRecipeClass != null && addRecipeClass.getUserId().equals(currentUserId)) {
+                        addRecipeList.add(addRecipeClass);
+                    }
                 }
                 adapter1.notifyDataSetChanged();
+                if (addRecipeList.isEmpty()) {
+                    // Display a message that no recipes were created
+                    Toast.makeText(MyRecipe.this, "No recipes created yet.", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
