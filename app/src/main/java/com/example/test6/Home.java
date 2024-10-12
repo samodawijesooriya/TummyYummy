@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -35,13 +37,15 @@ public class Home extends AppCompatActivity {
 
     // IM/2021/059 (Start)
     // define variable and objects
-    GridView gridView;
-    ArrayList<addRecipeClass> recipeList;
-    Adapter1 adapter1;
+    GridView gridView, searchGridView;
+    ArrayList<addRecipeClass> recipeList, searchRecipeList;
+    Adapter1 adapter1, searchAdapter;
     protected FirebaseAuth mAuth;
     private DatabaseReference reference;
     private String userId;
+    SearchView searchView;
     private ShapeableImageView profileImageView;
+
 
     // oncreate method
     @Override
@@ -63,6 +67,7 @@ public class Home extends AppCompatActivity {
         // geting the items from the xml file
         TextView usernameText = findViewById(R.id.home_username);
         profileImageView = findViewById(R.id.imageView4);
+
 
         // refer to the database and retrive the data
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -115,6 +120,7 @@ public class Home extends AppCompatActivity {
 
         // Set up the adapter
         adapter1 = new Adapter1(recipeList, this);
+
         gridView.setAdapter(adapter1);
 
         // Fetch only recipes with duration <= 20 minutes and limit the result to 2
@@ -205,7 +211,6 @@ public class Home extends AppCompatActivity {
     }
 
 
-
     public void GoToDesserts(View view) {
         startActivity(new Intent(this, Desserts.class));
     }
@@ -216,7 +221,8 @@ public class Home extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Show a confirmation dialog before exiting
-        new androidx.appcompat.app.AlertDialog.Builder(this)
+        super.onBackPressed();
+        new AlertDialog.Builder(this)
                 .setTitle("Exit App")
                 .setMessage("Are you sure you want to exit?")
                 .setPositiveButton("Yes", (dialog, which) -> {

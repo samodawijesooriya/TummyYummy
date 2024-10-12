@@ -43,10 +43,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favourites_recyclerView"
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="549dp"
         android:layout_marginTop="64dp"
-        android:clipToPadding="false"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -58,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/bottom_background"
         android:elevation="2dp"
         app:itemIconSize="30dp"

@@ -127,5 +127,9 @@ public class UserHome extends AppCompatActivity {
         startActivity(new Intent(this, ProfilePictureAdd.class));
     }
 
+    public void GoToContactUs(View view) {
+        startActivity(new Intent(this, ContactUs.class));
+    }
+
     // IM/2021/082 (end)
 }

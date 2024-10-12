@@ -60,7 +60,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameShow" />
+        app:layout_constraintTop_toBottomOf="@+id/UserNameShow"
+        android:onClick="GoToContactUs"/>
 
     <Button
         android:id="@+id/aboutus"
@@ -90,16 +91,15 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/bottom_background"
         android:elevation="2dp"
         android:gravity="bottom"
         android:paddingTop="0dp"
         android:paddingBottom="0dp"
-        app:itemIconSize="24dp"
+        app:itemIconSize="30dp"
         app:itemTextColor="@color/white"
-        app:itemIconTint="@drawable/item_selector"
-        app:itemRippleColor="@android:color/transparent"
+        app:itemIconTint="#FFFFFF"
         app:labelVisibilityMode="selected"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

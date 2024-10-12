@@ -100,6 +100,11 @@ public class AdapterFav extends RecyclerView.Adapter<AdapterFav.HolderRecipeFav>
         return addRecipeClassArrayList.size(); // return list size of records
     }
 
+    public void searchDatalist(ArrayList<addRecipeClass> searchList) {
+        this.addRecipeClassArrayList = searchList;
+        notifyDataSetChanged();
+    }
+
     class HolderRecipeFav extends RecyclerView.ViewHolder{
 
         ImageView recycleImage;

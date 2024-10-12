@@ -8,6 +8,7 @@ import android.widget.GridView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -27,7 +28,8 @@ public class MyRecipe extends AppCompatActivity {
     // initialize objects
     GridView gridView;
     ArrayList<addRecipeClass> addRecipeList;
-    Adapter1 adapter1;
+    Adapter1 adapter1, searchAdapter;
+    SearchView searchView;
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("recipes");
 
     @Override
@@ -46,6 +48,23 @@ public class MyRecipe extends AppCompatActivity {
         addRecipeList = new ArrayList<>();
         adapter1 = new Adapter1(addRecipeList, this);
         gridView.setAdapter(adapter1);
+
+        searchView = findViewById(R.id.my_recipe_searchView);
+        searchView.clearFocus();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                searchList(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                searchList(s);
+                return true;
+            }
+        });
 
         // database reference added
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -97,6 +116,16 @@ public class MyRecipe extends AppCompatActivity {
             return false;
         });
         // Ends here
+    }
+
+    public  void searchList(String text){
+        ArrayList<addRecipeClass> searchList = new ArrayList<>();
+        for(addRecipeClass recipe: addRecipeList){
+            if(recipe.getName().toLowerCase().contains(text.toLowerCase())){
+                searchList.add(recipe);
+            }
+        }
+        adapter1.searchDatalist(searchList);
     }
 
     public void GoToAddRecipe(View view) {

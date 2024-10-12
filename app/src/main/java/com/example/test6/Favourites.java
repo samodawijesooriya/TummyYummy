@@ -34,6 +34,7 @@ public class Favourites extends AppCompatActivity {
     private ArrayList<addRecipeClass> addRecipeClassArrayList;
     // adapter to set in recycleView
     private AdapterFav adapterFav;
+    SearchView searchView;
     private RecyclerView favRecyclerView;
 
     @Override
@@ -51,6 +52,24 @@ public class Favourites extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(Favourites.this, 1);
         favRecyclerView.setLayoutManager(gridLayoutManager);
         loadFavoriteRecipes();
+
+        searchView = findViewById(R.id.favourites_searchView);
+        searchView.clearFocus();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                searchList(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                searchList(s);
+                return true;
+            }
+        });
+
 
         // Bottom navigation code
         BottomNavigationView bottomNavigationView = findViewById(R.id.favourites_bottomNavigationView);
@@ -118,6 +137,16 @@ public class Favourites extends AppCompatActivity {
 
             }
         });
+    }
+
+    public  void searchList(String text){
+        ArrayList<addRecipeClass> searchList = new ArrayList<>();
+        for(addRecipeClass recipe: addRecipeClassArrayList){
+            if(recipe.getName().toLowerCase().contains(text.toLowerCase())){
+                searchList.add(recipe);
+            }
+        }
+        adapterFav.searchDatalist(searchList);
     }
 
 }

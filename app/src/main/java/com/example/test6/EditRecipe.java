@@ -100,6 +100,8 @@ public class EditRecipe extends AppCompatActivity {
                     String ingredients = addRecipeClass.getIngredients();
                     String method = addRecipeClass.getMethod();
                     String duration = addRecipeClass.getDuration();
+//                    imageUri = Uri.parse(addRecipeClass.getImgUrl());
+//                    videoUriEdit = Uri.parse(addRecipeClass.getVideoUrl());
 
                     // Retrieve Data FRom FireBase
                     recipeName.setText(name);
@@ -177,7 +179,7 @@ public class EditRecipe extends AppCompatActivity {
                 String name = recipeName.getText().toString();
                 String recipeIngredients = ingredientsEdit.getText().toString();
                 String recipeMethod = methodEdit.getText().toString();
-                String videoDuration = durationEdit.getText().toString();
+                String videoDuration = durationEdit.getText().toString().replaceAll("\\D", "") + " min";;
                 String selectedCategory = category.getSelectedItem().toString();
 
                 // validation
@@ -186,23 +188,45 @@ public class EditRecipe extends AppCompatActivity {
                 } else {
                     String userID = mAuth.getCurrentUser().getUid();
 
-                    // Update the existing recipe using the recipeId
-                    addRecipeClass updatedRecipe = new addRecipeClass(recipeId, name, recipeIngredients, recipeMethod, videoDuration, selectedCategory, userID);
+                    reference.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            addRecipeClass exRecipe = dataSnapshot.getValue(addRecipeClass.class);
+                            String currentImageUrl = exRecipe.getImgUrl();
+                            String currentVideoUrl = exRecipe.getVideoUrl();
 
-                    if(imageUri != null || videoUriEdit != null){
-                        progressBar.setVisibility(View.VISIBLE);
-                        uploadToFirebase(imageUri, recipeId);
-                        uploadVideo(videoUriEdit, recipeId);
-                    }else{
-                        Toast.makeText(EditRecipe.this, "Please select image", Toast.LENGTH_SHORT).show();
-                    }
+                            // Update the existing recipe using the recipeId
+                            addRecipeClass updatedRecipe = new addRecipeClass(recipeId, name, recipeIngredients, recipeMethod, videoDuration, selectedCategory, userID);
 
-                    reference.child(recipeId).setValue(updatedRecipe).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(EditRecipe.this, "Recipe updated successfully", Toast.LENGTH_SHORT).show();
-                            clearFields();
-                        } else {
-                            Toast.makeText(EditRecipe.this, "Failed to update recipe", Toast.LENGTH_SHORT).show();
+                            // Handle image and video upload
+                            if (imageUri != null) {
+                                uploadToFirebase(imageUri, recipeId);  // Upload new image
+                            } else if (currentImageUrl != null) {
+                                reference.child(recipeId).child("imgUrl").setValue(currentImageUrl);  // Keep old image URL if no new image is selected
+                            }
+
+                            if (videoUriEdit != null) {
+                                uploadVideo(videoUriEdit, recipeId);  // Upload new video
+                            } else if (currentVideoUrl != null) {
+                                reference.child(recipeId).child("videoUrl").setValue(currentVideoUrl);  // Keep old video URL if no new video is selected
+                            }
+
+                            reference.child(recipeId).setValue(updatedRecipe).addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(EditRecipe.this, "Recipe updated successfully", Toast.LENGTH_SHORT).show();
+                                    clearFields();
+                                    startActivity(new Intent(EditRecipe.this, Category.class));
+                                    finish();
+                                } else {
+                                    Toast.makeText(EditRecipe.this, "Failed to update recipe", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(EditRecipe.this, "Database Error", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -255,8 +279,6 @@ public class EditRecipe extends AppCompatActivity {
                         reference.child(recipeID).child("videoUrl").setValue(uri.toString());
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(EditRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(EditRecipe.this, MyRecipe.class));
-                        finish();
                     }
                 });
             }
@@ -287,9 +309,6 @@ public class EditRecipe extends AppCompatActivity {
                                 // Update the imgUrl field in the database
                                 reference.child(recipeID).child("imgUrl").setValue(uri.toString());
                                 progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(EditRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(EditRecipe.this, Category.class));
-                                finish();
                             }
                         });
                     }

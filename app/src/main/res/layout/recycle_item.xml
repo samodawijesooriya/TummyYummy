@@ -4,25 +4,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/myLinearLayout"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="start"
     android:padding="20dp">
 
 <!--    IM/2021/103 (start)-->
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="10dp"
-        app:cardElevation="10dp"
         android:id="@+id/recycleCard"
-        app:cardCornerRadius="20dp">
+        android:layout_width="350dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="0dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp">
 
         <ImageView
-            android:layout_width="350dp"
-            android:layout_height="150dp"
             android:id="@+id/recycleImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop" />
+
         <TextView
             android:id="@+id/recycleVideoDuration1"
             android:layout_width="80dp"

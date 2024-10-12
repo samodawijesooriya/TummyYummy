@@ -42,6 +42,12 @@ public class Adapter1 extends BaseAdapter {
         return addRecipeList.size();
     }
 
+    // get item sizes for the search view
+    public void searchDatalist(ArrayList<addRecipeClass> searchList) {
+        this.addRecipeList = searchList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public Object getItem(int i) {
         return null;

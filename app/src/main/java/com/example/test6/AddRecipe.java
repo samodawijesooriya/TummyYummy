@@ -172,7 +172,7 @@ public class AddRecipe extends AppCompatActivity {
                 String recipeName = name.getText().toString();
                 String recipeIngredients = ingredients.getText().toString();
                 String recipeMethod = method.getText().toString();
-                String videoDuration = duration.getText().toString();
+                String videoDuration = duration.getText().toString().replaceAll("\\D", "") + " min";
                 String selectedCategory = category.getSelectedItem().toString();
 
 
@@ -181,9 +181,7 @@ public class AddRecipe extends AppCompatActivity {
                     Snackbar.make(findViewById(R.id.main), "Recipe added successfully", Snackbar.LENGTH_SHORT).show();
                 }else {
                     String recipeID = reference.push().getKey();
-
                     String userID = mAuth.getCurrentUser().getUid();
-
                     addRecipeClass recipe = new addRecipeClass(recipeID, recipeName, recipeIngredients, recipeMethod, videoDuration, selectedCategory, userID);
 
                     if(imageUri != null || videoUri != null){
@@ -194,15 +192,18 @@ public class AddRecipe extends AppCompatActivity {
                         Toast.makeText(AddRecipe.this, "Please select image and video", Toast.LENGTH_SHORT).show();
                     }
 
+
                     if (recipeID != null) {
                         reference.child(recipeID).setValue(recipe).addOnCompleteListener(task -> {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(AddRecipe.this, "Recipe added successfully", Toast.LENGTH_SHORT).show();
-                                        clearFields();  // Clear the input fields
-                                    } else {
-                                        Toast.makeText(AddRecipe.this, "Failed to add recipe", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AddRecipe.this, "Recipe added successfully", Toast.LENGTH_SHORT).show();
+                                clearFields();  // Clear the input fields
+                                startActivity(new Intent(AddRecipe.this, MyRecipe.class));  // Go back to recipe list
+                                finish();
+                            } else {
+                                Toast.makeText(AddRecipe.this, "Failed to add recipe", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
             }
@@ -223,7 +224,6 @@ public class AddRecipe extends AppCompatActivity {
                         // Update the imgUrl field in the database
                         reference.child(recipeID).child("videoUrl").setValue(uri.toString());
                         progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(AddRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(AddRecipe.this, MyRecipe.class));
                         finish();
                     }
@@ -262,7 +262,6 @@ public class AddRecipe extends AppCompatActivity {
                                 // Update the imgUrl field in the database
                                 reference.child(recipeID).child("imgUrl").setValue(uri.toString());
                                 progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(AddRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(AddRecipe.this, MyRecipe.class));
                                 finish();
                             }
