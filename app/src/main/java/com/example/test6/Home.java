@@ -221,7 +221,6 @@ public class Home extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Show a confirmation dialog before exiting
-        super.onBackPressed();
         new AlertDialog.Builder(this)
                 .setTitle("Exit App")
                 .setMessage("Are you sure you want to exit?")

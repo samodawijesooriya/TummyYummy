@@ -182,6 +182,7 @@ public class AddRecipe extends AppCompatActivity {
                 }else {
                     String recipeID = reference.push().getKey();
                     String userID = mAuth.getCurrentUser().getUid();
+
                     addRecipeClass recipe = new addRecipeClass(recipeID, recipeName, recipeIngredients, recipeMethod, videoDuration, selectedCategory, userID);
 
                     if(imageUri != null || videoUri != null){
