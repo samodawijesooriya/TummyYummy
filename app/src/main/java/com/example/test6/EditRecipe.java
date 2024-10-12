@@ -46,14 +46,13 @@ import com.google.firebase.storage.UploadTask;
 public class EditRecipe extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
-    private String recipeId;
+    private String recipeId, existingImage, existingVideo;
     private EditText recipeName;
     private EditText ingredientsEdit;
     private EditText methodEdit;
     private EditText durationEdit;
     Button saveBtn, editCancelBtn;
-    private Uri imageUri;
-    private Uri videoUriEdit;
+    private Uri imageUri,videoUriEdit;
     private ImageView uploadImg, uploadVideo;
     ProgressBar progressBar;
     final private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
@@ -100,14 +99,27 @@ public class EditRecipe extends AppCompatActivity {
                     String ingredients = addRecipeClass.getIngredients();
                     String method = addRecipeClass.getMethod();
                     String duration = addRecipeClass.getDuration();
-//                    imageUri = Uri.parse(addRecipeClass.getImgUrl());
-//                    videoUriEdit = Uri.parse(addRecipeClass.getVideoUrl());
+                    String imgUrl = addRecipeClass.getImgUrl();
+                    String videoUrl = addRecipeClass.getVideoUrl();
 
                     // Retrieve Data FRom FireBase
                     recipeName.setText(name);
                     ingredientsEdit.setText(ingredients);
                     methodEdit.setText(method);
                     durationEdit.setText(duration);
+
+                    existingImage = imgUrl;
+                    existingVideo = videoUrl;
+
+                    // Load existing image thumbnail into imageView
+                    if (imgUrl != null && !imgUrl.isEmpty()) {
+                        Glide.with(EditRecipe.this).load(imgUrl).into(uploadImg);
+                    }
+                    // Load existing video thumbnail into VideoView
+                    if (videoUrl != null && !videoUrl.isEmpty()) {
+                        Glide.with(EditRecipe.this).load(videoUrl).into(uploadVideo); // Shows the thumbnail
+                    }
+
 
                 }else{
                     Toast.makeText(EditRecipe.this,"No data", Toast.LENGTH_LONG).show();
@@ -128,6 +140,7 @@ public class EditRecipe extends AppCompatActivity {
                     assert data != null;
                     imageUri = data.getData();
                     uploadImg.setImageURI(imageUri);
+
                 }else{
                     Toast.makeText(EditRecipe.this, "No image selected", Toast.LENGTH_SHORT).show();
                 }
@@ -192,8 +205,6 @@ public class EditRecipe extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             addRecipeClass exRecipe = dataSnapshot.getValue(addRecipeClass.class);
-                            String currentImageUrl = exRecipe.getImgUrl();
-                            String currentVideoUrl = exRecipe.getVideoUrl();
 
                             // Update the existing recipe using the recipeId
                             addRecipeClass updatedRecipe = new addRecipeClass(recipeId, name, recipeIngredients, recipeMethod, videoDuration, selectedCategory, userID);
@@ -201,14 +212,14 @@ public class EditRecipe extends AppCompatActivity {
                             // Handle image and video upload
                             if (imageUri != null) {
                                 uploadToFirebase(imageUri, recipeId);  // Upload new image
-                            } else if (currentImageUrl != null) {
-                                reference.child(recipeId).child("imgUrl").setValue(currentImageUrl);  // Keep old image URL if no new image is selected
+                            } else{
+                                updatedRecipe.setImgUrl(existingImage); //  Keep the existing image
                             }
 
                             if (videoUriEdit != null) {
                                 uploadVideo(videoUriEdit, recipeId);  // Upload new video
-                            } else if (currentVideoUrl != null) {
-                                reference.child(recipeId).child("videoUrl").setValue(currentVideoUrl);  // Keep old video URL if no new video is selected
+                            } else{
+                                updatedRecipe.setVideoUrl(existingVideo); // Keep the existing video
                             }
 
                             reference.child(recipeId).setValue(updatedRecipe).addOnCompleteListener(task -> {
