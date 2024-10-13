@@ -27,12 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//IM/2021/059 (start)
 public class Favourites extends AppCompatActivity {
 
-    // array to hold the recipes
+                                                                                                    // initialize the objects to the adapter
     private ArrayList<addRecipeClass> addRecipeClassArrayList;
-    // adapter to set in recycleView
     private AdapterFav adapterFav;
     SearchView searchView;
     private RecyclerView favRecyclerView;
@@ -47,15 +46,15 @@ public class Favourites extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+                                                                                                    // Recycle view setup
         favRecyclerView = findViewById(R.id.favourites_recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(Favourites.this, 1);
         favRecyclerView.setLayoutManager(gridLayoutManager);
-        loadFavoriteRecipes();
+        loadFavoriteRecipes();                                                                      //  populate the RecyclerView with favorite recipes
 
-        searchView = findViewById(R.id.favourites_searchView);
+        searchView = findViewById(R.id.favourites_searchView);                                      // Binds the search view from the layout
         searchView.clearFocus();
-
+                                                                                                    // Sets up listeners for handling search input
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -102,34 +101,26 @@ public class Favourites extends AppCompatActivity {
     }
 
     private void loadFavoriteRecipes() {
-        // init list
+                                                                                                    // init list
         addRecipeClassArrayList = new ArrayList<>();
 
-        // load favorite books from database
-        // user > userId > favorite
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                                                                                                    // load favorite books from database
+                                                                                                    // user > userId > favorite
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");    // set the database connection
         reference.child(FirebaseAuth.getInstance().getUid()).child("favorite").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // clear list before starting adding data
-                addRecipeClassArrayList.clear();
+                addRecipeClassArrayList.clear();                                                    // clear list before starting adding data
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    // we will only get recipeId here
-                    String recipeId = ""+ds.child("recipeId").getValue();
-
-                    // set id to addRecipeClass
-                    addRecipeClass addRecipeClass = new addRecipeClass();
+                    String recipeId = ""+ds.child("recipeId").getValue();                      // we will only get recipeId here
+                    addRecipeClass addRecipeClass = new addRecipeClass();                           // set id to addRecipeClass
                     addRecipeClass.setRecipeID(recipeId);
 
-                    // add recipes to list
-                    addRecipeClassArrayList.add(addRecipeClass);
+                    addRecipeClassArrayList.add(addRecipeClass);                                    // add recipes to list
                 }
-
-                adapterFav = new AdapterFav(Favourites.this, addRecipeClassArrayList);
-                // set adapter to recycle view
-                favRecyclerView.setAdapter(adapterFav);
-
-                adapterFav.notifyDataSetChanged();
+                adapterFav = new AdapterFav(Favourites.this, addRecipeClassArrayList);      // create an object for the addRecipeClass
+                favRecyclerView.setAdapter(adapterFav);                                             // set adapter to recycle view
+                adapterFav.notifyDataSetChanged();                                                  // set the data for the adapter
             }
 
             @Override
@@ -139,7 +130,7 @@ public class Favourites extends AppCompatActivity {
         });
     }
 
-    public  void searchList(String text){
+    public  void searchList(String text){                                                           // Search for recipes within the favorite
         ArrayList<addRecipeClass> searchList = new ArrayList<>();
         for(addRecipeClass recipe: addRecipeClassArrayList){
             if(recipe.getName().toLowerCase().contains(text.toLowerCase())){
@@ -148,6 +139,6 @@ public class Favourites extends AppCompatActivity {
         }
         adapterFav.searchDatalist(searchList);
     }
-
+//IM/2021/059 end
 }
 //IM/2021/103 End

@@ -160,10 +160,6 @@ public class ProfileSettings extends AppCompatActivity {
         startActivity(new Intent(this, ChangeNumber.class));
     }
 
-    public void GoToChnagePassword(View view) {
-        startActivity(new Intent(this, ChangePassword.class));
-    }
-
     public void GobackToUserProfile(View view) {
         startActivity(new Intent(this, UserHome.class));
     }

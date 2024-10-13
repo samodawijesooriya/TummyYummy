@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.auth.User;
-
+// IM/2021/059 Start
 public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseDatabase database;
@@ -61,6 +61,8 @@ public class SignUp extends AppCompatActivity {
                 }
                 else if(username.isEmpty()){
                     UserName.setError("Username cannot be empty");
+                }else if(!isValidPassword(password)){
+                    SignUpPassword.setError("Password must be at least 8 characters long and include both letters and numbers");
                 }
                 else{
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -95,6 +97,13 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
+    // Method to validate password
+    private boolean isValidPassword(String password) {
+        // Regex pattern to check for at least one letter, one digit, and minimum 8 characters
+        String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+        return password.matches(passwordPattern);
+    }
+
     public void Login(View view) {
         startActivity(new Intent(this, Signin.class));
     }
@@ -103,6 +112,7 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    // IM/2021/059 end
     public void GoToHome(View view) {
     }
 }

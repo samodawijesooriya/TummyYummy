@@ -1,4 +1,3 @@
-//IM/2021/103 Start
 package com.example.test6;
 
 import android.content.Context;
@@ -28,14 +27,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
+//IM/2021/59 and IM/2021/103 Start
 public class Signin extends AppCompatActivity {
 
+    // Initialize objects for firebase and other elements
     private FirebaseAuth mAuth;
     private EditText SignInEmail, SignInPassword, SignInUsername;
     private Button SignInBtn;
     private TextView forgotPass;
-
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -45,16 +44,19 @@ public class Signin extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_signin);
 
+        // Initialize Firebase Auth instance
         mAuth = FirebaseAuth.getInstance();
-
+        // Initialize shared preferences
         sharedPreferences = getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+        // Find UI elements by ID
         SignInEmail = findViewById(R.id.sign_in_email);
         SignInPassword = findViewById(R.id.sign_in_password);
         SignInBtn = findViewById(R.id.sign_in_login);
         forgotPass = findViewById(R.id.fogotPS);
 
+        // Set onClickListener for the sign-in button
         SignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,20 +67,19 @@ public class Signin extends AppCompatActivity {
                 if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     if (!password.isEmpty()) {
 
+                        // to sign in with email and password
                         mAuth.signInWithEmailAndPassword(email, password)
                                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
-
+                                        // Save login state in shared preferences
                                         editor.putBoolean("isLoggedIn", true);
                                         editor.putString("email", email);
                                         editor.apply();
 
                                         startActivity(new Intent(Signin.this, Home.class));
                                         finish();
-
                                         Toast.makeText(Signin.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -97,9 +98,11 @@ public class Signin extends AppCompatActivity {
             }
         });
 
+        // when user clicks fogot password clicks this show the alert dialog
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Create a dialog for password reset
                 AlertDialog.Builder builder = new AlertDialog.Builder(Signin.this);
                 View dialogView = getLayoutInflater().inflate(R.layout.dialog_fogot, null);
                 EditText emailBox = dialogView.findViewById(R.id.dialogFogot_emailBox);
@@ -151,4 +154,5 @@ public class Signin extends AppCompatActivity {
         startActivity(new Intent(this, SignUp.class));
     }
 }
+// IM/2021/059 end
 //IM/2021/103 End

@@ -26,12 +26,12 @@ import java.util.Objects;
 public class DeleteAccount extends AppCompatActivity {
 
     // IM/2021/059 (start)
-    // Initialize the objects for the firebase
+                                                                                                    // Initialize the objects for the firebase
     protected FirebaseAuth mAuth;
     protected FirebaseUser firebaseUser;
 
 
-    // oncreate func
+                                                                                                    // oncreate function
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,35 +43,33 @@ public class DeleteAccount extends AppCompatActivity {
             return insets;
         });
 
-        // delete acc textview get
+                                                                                                    // delete acc textview get
         TextView deleteAcc = findViewById(R.id.deleteAccount_delete);
-
-        // connection for the firebase
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();                                                         // connection for the firebase
         firebaseUser = mAuth.getCurrentUser();
 
-        // delete the account from the
-        deleteAcc.setOnClickListener(new View.OnClickListener() {
+        deleteAcc.setOnClickListener(new View.OnClickListener() {                                   // delete the account from the
             @Override
             public void onClick(View view) {
+                                                                                                    // when user clicks the delete btn appear a dialog box to delete the account from the database
                 AlertDialog.Builder dialog = new AlertDialog.Builder(DeleteAccount.this);
                 dialog.setTitle("Are you sure?");
                 dialog.setMessage("Deleting this account will result in completely removing your "+
                         "account from the system and you won't be able to access the app.");
-                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {     // when user clicks the positive btn in the dialog box
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        AlertDialog progressDialog = new AlertDialog.Builder(DeleteAccount.this)
+                        AlertDialog progressDialog = new AlertDialog.Builder(DeleteAccount.this)    // delete the user account from the database
                                 .setView(R.layout.dialog_progress)
                                 .setCancelable(false)
                                 .create();
+                        progressDialog.show();                                                      // show dialog box
 
-                        progressDialog.show();
-
-                        firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {// delete from the firebase
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                progressDialog.dismiss();
+                                progressDialog.dismiss();                                           // show the success message
                                 if(task.isSuccessful()){
                                     Toast.makeText(DeleteAccount.this, "Account Deleted", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(DeleteAccount.this, MainActivity.class);
@@ -83,7 +81,7 @@ public class DeleteAccount extends AppCompatActivity {
                         });
                     }
                 });
-                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {    // if task does not succeed show an error message
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -96,6 +94,7 @@ public class DeleteAccount extends AppCompatActivity {
         });
     }
 
+                                                                                                    // go back to the user profile
     public void GoFromDeleteAccToUserProfile(View view) {
         startActivity(new Intent(this, ProfileSettings.class));
     }

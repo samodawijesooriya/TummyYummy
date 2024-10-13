@@ -59,7 +59,7 @@ public class Home extends AppCompatActivity {
             return insets;
         });
 
-        // creating objects
+        // creating objects for the firebase
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         userId = mAuth.getCurrentUser().getUid();
@@ -78,7 +78,7 @@ public class Home extends AppCompatActivity {
                 if(userProfile != null){
                     // printing data
                     String user = userProfile.username;
-                    usernameText.setText("Hi " + user+"!");
+                    usernameText.setText("Hi " + user+" !");
 
                     // check if the imageUrl is null
                     if (userProfile.imgUrl != null) {
@@ -210,10 +210,6 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    public void GoToDesserts(View view) {
-        startActivity(new Intent(this, Desserts.class));
-    }
     // IM/2021/059 (end)
 
     // IM/2021/103 (start)

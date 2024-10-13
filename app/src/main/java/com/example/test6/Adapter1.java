@@ -29,23 +29,20 @@ public class Adapter1 extends BaseAdapter {
     private Context context;
     LayoutInflater layoutInflater;
 
-    // constructor for the Adapter 1
-    public Adapter1(ArrayList<addRecipeClass> addRecipeList, Context context) {
+    public Adapter1(ArrayList<addRecipeClass> addRecipeList, Context context) {                     // create a constructor for adapter 1
         this.addRecipeList = addRecipeList;
         this.context = context;
-
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();                                                         // initialize firebase authentication
     }
 
     @Override
     public int getCount() {
-        return addRecipeList.size();
+        return addRecipeList.size();                                                                // return the size of the addrecipeclass
     }
 
-    // get item sizes for the search view
-    public void searchDatalist(ArrayList<addRecipeClass> searchList) {
-        this.addRecipeList = searchList;
-        notifyDataSetChanged();
+    public void searchDatalist(ArrayList<addRecipeClass> searchList) {                              //  updates the list of recipes when performing a search
+    this.addRecipeList = searchList;
+    notifyDataSetChanged();                                                                         // update the view
     }
 
     @Override
@@ -61,42 +58,39 @@ public class Adapter1 extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        // set content
-        if (layoutInflater == null){
+        if (layoutInflater == null){                                                                // set content
             layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
+
         if(view == null){
             view = layoutInflater.inflate(R.layout.grid_item, null);
         }
 
-        // get the current User Id
-        String currentUserId = mAuth.getCurrentUser().getUid();
-        // Get the user ID of the recipe's creator
-        String recipeOwnerId = addRecipeList.get(i).getUserId();
 
-        // when onclick go should go to the ViewEditDelete.java
-        view.setOnClickListener(new View.OnClickListener() {
+        String currentUserId = mAuth.getCurrentUser().getUid();                                     // get the current User Id
+        String recipeOwnerId = addRecipeList.get(i).getUserId();                                    // Get the user ID of the recipe's creator
+
+        view.setOnClickListener(new View.OnClickListener() {                                        // when user onclick go should go to the ViewEditDelete.java
             @Override
             public void onClick(View view) {
                 Intent intent;
-                if (currentUserId.equals(recipeOwnerId)) {
-                    // If the current user is the owner of the recipe, go to EditRecipeView
-                    intent = new Intent(context, ViewEditDeleteRecipe.class);
+                if (currentUserId.equals(recipeOwnerId)) {                                          // if the current user is equal to the recipe owner then his recipes will show here
+                    intent = new Intent(context, ViewEditDeleteRecipe.class);                       // If the current user is the owner of the recipe, go to EditRecipeView
                 } else {
-                    // Otherwise, go to RecipeView
-                    intent = new Intent(context, RecipeView.class);
+                    intent = new Intent(context, RecipeView.class);                                 // Otherwise, go to RecipeView
                 }
-                intent.putExtra("recipeId", addRecipeList.get(i).getRecipeID());
+                intent.putExtra("recipeId", addRecipeList.get(i).getRecipeID());              // send recipe id through intent for the relevant activity
                 context.startActivity(intent);
             }
         });
 
-        ImageView gridImage = view.findViewById(R.id.gridViewImage);
-        TextView videoDuration = view.findViewById(R.id.videoDuration1);
-        TextView recipeName = view.findViewById(R.id.recipeNameText);
+                                                                                                    // Bind Data to the Views:
+        ImageView gridImage = view.findViewById(R.id.gridViewImage);                                // for the grid view
+        TextView videoDuration = view.findViewById(R.id.videoDuration1);                            // for the duration
+        TextView recipeName = view.findViewById(R.id.recipeNameText);                               // for the recipe name
 
         addRecipeClass recipe = addRecipeList.get(i);
-        Glide.with(context).load(addRecipeList.get(i).getImgUrl()).into(gridImage);
+        Glide.with(context).load(addRecipeList.get(i).getImgUrl()).into(gridImage);                 // render image
         videoDuration.setText(addRecipeList.get(i).getDuration());
         recipeName.setText(addRecipeList.get(i).getName());
 
