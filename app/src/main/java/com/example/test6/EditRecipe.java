@@ -40,11 +40,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-// IM/2021/082 (Start)
-
+                                                                                                                    // IM/2021/082 (Start)
 public class EditRecipe extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;                                                                                     // Initialize Objects
     private DatabaseReference reference;
     private String recipeId, existingImage, existingVideo;
     private EditText recipeName;
@@ -67,8 +65,7 @@ public class EditRecipe extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // Initializing Variables
+                                                                                                                    // Initializing Variables
         recipeName = findViewById(R.id.editRecipe_recipeNameText);
         ingredientsEdit = findViewById(R.id.editRecipe_ingredientTextAdd);
         methodEdit = findViewById(R.id.addRecipe_methodAdd);
@@ -88,39 +85,33 @@ public class EditRecipe extends AppCompatActivity {
 
         recipeId = getIntent().getStringExtra("recipeId");
 
-        // Get data from DB
-        reference.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
+        reference.child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {                         // Get data from DB
+            @Override                                                                                               // to show the available data
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 addRecipeClass addRecipeClass = dataSnapshot.getValue(addRecipeClass.class);
 
                 if(addRecipeClass != null){
-                    String name = addRecipeClass.getName();
+                    String name = addRecipeClass.getName();                                                         // Retrieve Data From FireBase
                     String ingredients = addRecipeClass.getIngredients();
                     String method = addRecipeClass.getMethod();
                     String duration = addRecipeClass.getDuration();
                     String imgUrl = addRecipeClass.getImgUrl();
                     String videoUrl = addRecipeClass.getVideoUrl();
 
-                    // Retrieve Data FRom FireBase
-                    recipeName.setText(name);
+                    recipeName.setText(name);                                                                       // Set the text to visible
                     ingredientsEdit.setText(ingredients);
                     methodEdit.setText(method);
                     durationEdit.setText(duration);
 
-                    existingImage = imgUrl;
+                    existingImage = imgUrl;                                                                         // create a global variable to check the existing image
                     existingVideo = videoUrl;
 
-                    // Load existing image thumbnail into imageView
-                    if (imgUrl != null && !imgUrl.isEmpty()) {
-                        Glide.with(EditRecipe.this).load(imgUrl).into(uploadImg);
+                    if (imgUrl != null && !imgUrl.isEmpty()) {                                                      // Load existing image thumbnail into imageView
+                        Glide.with(EditRecipe.this).load(imgUrl).into(uploadImg);                            // show the existing image
                     }
-                    // Load existing video thumbnail into VideoView
-                    if (videoUrl != null && !videoUrl.isEmpty()) {
-                        Glide.with(EditRecipe.this).load(videoUrl).into(uploadVideo); // Shows the thumbnail
+                    if (videoUrl != null && !videoUrl.isEmpty()) {                                                  // Load existing video thumbnail into VideoView
+                        Glide.with(EditRecipe.this).load(videoUrl).into(uploadVideo);                        // Shows the existing video
                     }
-
-
                 }else{
                     Toast.makeText(EditRecipe.this,"No data", Toast.LENGTH_LONG).show();
                 }
@@ -130,9 +121,9 @@ public class EditRecipe extends AppCompatActivity {
                 Toast.makeText(EditRecipe.this,"Database Error", Toast.LENGTH_LONG).show();
             }
         });
-
-        // Upload image code
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                                                                                                                    // IM/2021/059 (Start - Upload image)
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
                 if(result.getResultCode() == AppCompatActivity.RESULT_OK){
@@ -146,8 +137,7 @@ public class EditRecipe extends AppCompatActivity {
                 }
             }
         });
-
-        // Upload video code
+                                                                                                                    // IM/2021/059 (Upload video code)
         ActivityResultLauncher<Intent> videoPickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -157,21 +147,21 @@ public class EditRecipe extends AppCompatActivity {
                             Intent data = result.getData();
                             if (data != null) {
                                 videoUriEdit = data.getData();
-                                Glide.with(EditRecipe.this).load(videoUriEdit).into(uploadVideo);  // Update the video view
+                                Glide.with(EditRecipe.this).load(videoUriEdit).into(uploadVideo);            // Update the video view
                             } else {
                                 Toast.makeText(EditRecipe.this, "No video selected", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
                 }
-        );
+        );                                                                                                          // IM/2021/059 (End)
 
         uploadVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent videoPicker = new Intent(Intent.ACTION_PICK);
                 videoPicker.setType("video/*");
-                videoPickerLauncher.launch(videoPicker);  // Use the video picker launcher
+                videoPickerLauncher.launch(videoPicker);                                                             // Use the video picker launcher
             }
         });
 
@@ -184,8 +174,7 @@ public class EditRecipe extends AppCompatActivity {
                 activityResultLauncher.launch(photoPicker);
             }
         });
-
-        // Save to DB
+                                                                                                                    // Save to DB
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,8 +183,7 @@ public class EditRecipe extends AppCompatActivity {
                 String recipeMethod = methodEdit.getText().toString();
                 String videoDuration = durationEdit.getText().toString().replaceAll("\\D", "") + " min";;
                 String selectedCategory = category.getSelectedItem().toString();
-
-                // validation
+                                                                                                                    // validation
                 if (name.isEmpty() || recipeIngredients.isEmpty() || recipeMethod.isEmpty() || videoDuration.isEmpty()) {
                     Snackbar.make(findViewById(R.id.main), "Please fill all fields", Snackbar.LENGTH_SHORT).show();
                 } else {
@@ -205,21 +193,19 @@ public class EditRecipe extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             addRecipeClass exRecipe = dataSnapshot.getValue(addRecipeClass.class);
-
-                            // Update the existing recipe using the recipeId
+                                                                                                                    // Update the existing recipe using the recipeId
                             addRecipeClass updatedRecipe = new addRecipeClass(recipeId, name, recipeIngredients, recipeMethod, videoDuration, selectedCategory, userID);
-
-                            // Handle image and video upload
+                                                                                                                    // Handle image and video upload
                             if (imageUri != null) {
-                                uploadToFirebase(imageUri, recipeId);  // Upload new image
+                                uploadToFirebase(imageUri, recipeId);                                               // Upload new image
                             } else{
-                                updatedRecipe.setImgUrl(existingImage); //  Keep the existing image
+                                updatedRecipe.setImgUrl(existingImage);                                             // Keep the existing image
                             }
 
                             if (videoUriEdit != null) {
-                                uploadVideo(videoUriEdit, recipeId);  // Upload new video
+                                uploadVideo(videoUriEdit, recipeId);                                                // Upload new video
                             } else{
-                                updatedRecipe.setVideoUrl(existingVideo); // Keep the existing video
+                                updatedRecipe.setVideoUrl(existingVideo);                                           // Keep the existing video
                             }
 
                             reference.child(recipeId).setValue(updatedRecipe).addOnCompleteListener(task -> {
@@ -252,18 +238,17 @@ public class EditRecipe extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,                          // Provide data for the spinner
                 R.array.recipe_category, android.R.layout.simple_spinner_item);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);                             // Spinner is displayed
 
-        category.setAdapter(adapter);
+        category.setAdapter(adapter);                                                                               // Connect the adapter to the spinner
 
-        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {                               // Set the Item Selected Listener
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Handle selection
-                String selectedCategory = parentView.getItemAtPosition(position).toString();
+                String selectedCategory = parentView.getItemAtPosition(position).toString();                        // Handle selection
             }
 
             @Override
@@ -286,8 +271,7 @@ public class EditRecipe extends AppCompatActivity {
                 videoReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        // Update the imgUrl field in the database
-                        reference.child(recipeID).child("videoUrl").setValue(uri.toString());
+                        reference.child(recipeID).child("videoUrl").setValue(uri.toString());           // Update the imgUrl field in the database
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(EditRecipe.this, "Uploaded", Toast.LENGTH_SHORT).show();
                     }
@@ -317,8 +301,7 @@ public class EditRecipe extends AppCompatActivity {
                         imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                // Update the imgUrl field in the database
-                                reference.child(recipeID).child("imgUrl").setValue(uri.toString());
+                                reference.child(recipeID).child("imgUrl").setValue(uri.toString());           // Update the imgUrl field in the database
                                 progressBar.setVisibility(View.INVISIBLE);
                             }
                         });
@@ -345,6 +328,5 @@ public class EditRecipe extends AppCompatActivity {
         methodEdit.setText("");
         durationEdit.setText("");
     }
-}
+}                                                                                                                   // IM/2021/082 (End)
 
-// IM/2021/082 (End)

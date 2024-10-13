@@ -32,9 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
-
-// IM/2021/082 (Start)
-
+                                                                                                                    // IM/2021/082 (Start)
 public class ProfileSettings extends AppCompatActivity {
 
     private DatabaseReference reference;
@@ -66,12 +64,10 @@ public class ProfileSettings extends AppCompatActivity {
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // Map the data to custom HelperClass or directly retrieve the fields
-                HelperClass userProfile = dataSnapshot.getValue(HelperClass.class);
+                HelperClass userProfile = dataSnapshot.getValue(HelperClass.class);                                 // Map the data to custom HelperClass or directly retrieve the fields
 
                 if (userProfile != null) {
-                    // get Details
-                    String username = userProfile.getUsername();
+                    String username = userProfile.getUsername();                                                    // get Details
                     String Email = userProfile.getEmail();
                     String mobile = userProfile.getMobile();
 
@@ -179,6 +175,4 @@ public class ProfileSettings extends AppCompatActivity {
     public void GoToDeleteAcc(View view) {
         startActivity(new Intent(this, DeleteAccount.class));
     }
-}
-
-// IM/2021/082 (End)
+}                                                                                                                   // IM/2021/082 (End)

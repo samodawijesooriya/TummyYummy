@@ -34,12 +34,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-// IM/2021/082 (Start)
-
+                                                                                                                    // IM/2021/082 / IM/2021/059 (Start)
 public class ProfilePictureAdd extends AppCompatActivity {
 
-    protected FirebaseAuth mAuth;
+    protected FirebaseAuth mAuth;                                                                                   // Initialize Objects
     private ImageView uploadImage;
     ProgressBar progressBar;
     private Uri imageUri;
@@ -47,7 +45,6 @@ public class ProfilePictureAdd extends AppCompatActivity {
     private String userId;
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
     final private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,14 +107,13 @@ public class ProfilePictureAdd extends AppCompatActivity {
                 imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            // Update only imgUrl in the database
+                                                                                                                    // Update only imgUrl in the database
                             databaseReference.child(userId).child("imgUrl").setValue(uri.toString());
                             progressBar.setVisibility(View.INVISIBLE);
                             save.setEnabled(true); // Re-enable save button
                             Toast.makeText(ProfilePictureAdd.this, "Uploaded", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(ProfilePictureAdd.this, UserHome.class));
                             finish();
-
                         }
                 });
             }
@@ -143,6 +139,4 @@ public class ProfilePictureAdd extends AppCompatActivity {
     public void GoToProfileSettings(View view) {
         startActivity(new Intent(this, ProfileSettings.class));
     }
-}
-
-// IM/2021/082 (End)
+}                                                                                                                   // IM/2021/082 / IM/2021/059 (End)

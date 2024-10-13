@@ -16,9 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-// IM/2021/082 (Start)
-
+                                                                                                                    // IM/2021/082 (Start)
 public class ChangeEmail extends AppCompatActivity {
 
     private EditText Email;
@@ -35,18 +33,18 @@ public class ChangeEmail extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        mAuth = FirebaseAuth.getInstance();
+
+        mAuth = FirebaseAuth.getInstance();                                                                         // handle user authentication
         reference = FirebaseDatabase.getInstance().getReference("users");
 
-        Email = findViewById(R.id.change_email_editTextTextEmailAddress);
+        Email = findViewById(R.id.change_email_editTextTextEmailAddress);                                           // Initialize Email Variable
     }
 
     public void ChangeEmailFunc(View view) {
         String newEmail = Email.getText().toString().trim();
-
-        // validations
+                                                                                                                    // validations
         if (newEmail.isEmpty()) {
-            Email.setError("Name cannot be empty");
+            Email.setError("Email cannot be empty");
             Email.requestFocus();
             return;
         }
@@ -62,6 +60,4 @@ public class ChangeEmail extends AppCompatActivity {
             }
         });
     }
-}
-
-// IM/2021/082 (End)
+}                                                                                                                   // IM/2021/082 (End)

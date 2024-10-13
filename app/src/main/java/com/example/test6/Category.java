@@ -27,11 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-// IM/2021/082 (Start)
-
+                                                                                                                    // IM/2021/082 (Start)
 public class Category extends AppCompatActivity {
-
+                                                                                                                    // Initialize Objects
     ArrayList<addRecipeClass> recipeList;
     MyAdapter2 myAdapter2;
     RecyclerView recyclerView;
@@ -50,7 +48,7 @@ public class Category extends AppCompatActivity {
             return insets;
         });
 
-        recyclerView = findViewById(R.id.category_recyclerView);
+        recyclerView = findViewById(R.id.category_recyclerView);                                                    // Initialize Variables
         GridLayoutManager gridLayoutManager = new GridLayoutManager(Category.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
@@ -61,21 +59,20 @@ public class Category extends AppCompatActivity {
         myAdapter2 = new MyAdapter2(Category.this, recipeList);
         recyclerView.setAdapter(myAdapter2);
 
-        // Get the category name from the Intent | from Home Activity
-        Intent intent = getIntent();
+        categoryTitle = findViewById(R.id.category_title);
+
+        Intent intent = getIntent();                                                                                // Get the category name from the Intent | from Home Activity
         String category = intent.getStringExtra("category");
 
-        if (category == null) {
+        if (category == null) {                                                                                     // Default showing category
             category = "All";
         }
 
-        categoryTitle = findViewById(R.id.category_title);
         categoryTitle.setText(category);
 
         loadRecipesByCategory(category);
-
-        // Set up TextWatcher for search bar
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                                                                                                    // IM/2021/059 (Start - Search Bar)
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {                                    // Set up TextWatcher for search bar
             @Override
             public boolean onQueryTextSubmit(String s) {
                 searchList(s);
@@ -90,22 +87,19 @@ public class Category extends AppCompatActivity {
         });
 
     }
-
-    // Load recipes based on category
+                                                                                                                    // IM/2021/059 (End - Search Bar)
+                                                                                                                    // Load recipes based on category
     private void loadRecipesByCategory(String category) {
-        // Reference to the Firebase node
-        reference = FirebaseDatabase.getInstance().getReference("recipes");
+        reference = FirebaseDatabase.getInstance().getReference("recipes");                                    // Reference to the Firebase node
 
-        // filter recipes by category
-        Query query;
+        Query query;                                                                                                // filter recipes by category
         if (category.equals("All")) {
             query = reference;
         } else {
             query = reference.orderByChild("category").equalTo(category);
         }
 
-        // Get the data from Firebase
-        query.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {                                                      // Get the data from Firebase
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 recipeList.clear();
@@ -124,7 +118,7 @@ public class Category extends AppCompatActivity {
         });
     }
 
-    public  void searchList(String text){
+    public  void searchList(String text){                                                                           // IM/2021/059 (related to Search)
         ArrayList<addRecipeClass> searchList = new ArrayList<>();
         for(addRecipeClass recipe: recipeList){
             if(recipe.getName().toLowerCase().contains(text.toLowerCase())){
@@ -132,12 +126,12 @@ public class Category extends AppCompatActivity {
             }
         }
         myAdapter2.searchDatalist(searchList);
-    }
+    }                                                                                                               // IM/2021/059 (end)
 
     public void GoHomeFromCategory(View view) {
         startActivity(new Intent(this, Home.class));
     }
 
 }
+                                                                                                                    //IM/2021/082 (End)
 
-//IM/2021/082 (End)

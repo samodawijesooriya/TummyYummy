@@ -15,9 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-// IM/2021/082 (Start)
-
+                                                                                                                    // IM/2021/082 (Start)
 public class ChangeName extends AppCompatActivity {
 
     private EditText Name;
@@ -38,13 +36,12 @@ public class ChangeName extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
 
-        Name = findViewById(R.id.editTextTextFirstName);
+        Name = findViewById(R.id.editTextTextFirstName);                                                            // Initialize Name Variable
     }
 
     public void ChangeNameFunc(View view) {
         String newName = Name.getText().toString().trim();
-
-        // Validations
+                                                                                                                    // Validations
         if (newName.isEmpty()) {
             Name.setError("Name cannot be empty");
             Name.requestFocus();
@@ -52,8 +49,7 @@ public class ChangeName extends AppCompatActivity {
         }
 
         String userId = mAuth.getCurrentUser().getUid();
-
-        // Update Firebase
+                                                                                                                    // Update Firebase
         reference.child(userId).child("username").setValue(newName).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(ChangeName.this, "Name updated successfully", Toast.LENGTH_SHORT).show();
@@ -63,5 +59,4 @@ public class ChangeName extends AppCompatActivity {
                     }
         });
     }
-}
-// IM/2021/082 (End)
+}                                                                                                                   // IM/2021/082 (End)

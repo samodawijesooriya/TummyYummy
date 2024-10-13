@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+                                                                                                                    // IM/2021/082 (start)
 public class ChangeNumber extends AppCompatActivity {
 
     private EditText Number;
@@ -36,13 +36,12 @@ public class ChangeNumber extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
 
-        Number = findViewById(R.id.change_number_editTextPhone);
+        Number = findViewById(R.id.change_number_editTextPhone);                                                    // Initialize Number Variable
     }
 
     public void ChangeNumberFunc(View view) {
         String newNumber = Number.getText().toString().trim();
-
-        // Validations
+                                                                                                                    // Validations
         if (newNumber.isEmpty()) {
             Number.setError("Number cannot be empty");
             Number.requestFocus();
@@ -72,6 +71,4 @@ public class ChangeNumber extends AppCompatActivity {
     public void GoToUserProfilefromChangeNumber(View view) {
         startActivity(new Intent(this, ProfileSettings.class));
     }
-}
-
-// IM/2021/082 (End)
+}                                                                                                                   // IM/2021/082 (End)

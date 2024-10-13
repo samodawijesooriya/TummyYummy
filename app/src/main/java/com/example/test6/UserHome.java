@@ -28,19 +28,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.IOException;
-
+                                                                                                                    // IM/2021/082 (start)
 public class UserHome extends AppCompatActivity {
-
-    // IM/2021/082 (start)
-    // initialize the variables and objects
-    protected FirebaseAuth mAuth;
+    protected FirebaseAuth mAuth;                                                                                   // initialize the variables and objects
     private DatabaseReference reference;
     private String userId;
     private ImageView ProfileImg;
 
-
-    // oncreate function
-    @Override
+    @Override                                                                                                       // oncreate function
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -50,28 +45,23 @@ public class UserHome extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // create objects
+                                                                                                                    // Initialize objects
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         userId = mAuth.getCurrentUser().getUid();
         TextView usernameText = findViewById(R.id.UserNameShow);
         ProfileImg = findViewById(R.id.user_profileImage);
-
-        // fetch data from the database
+                                                                                                                    // fetch data from the database
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HelperClass userProfile = dataSnapshot.getValue(HelperClass.class);
-
-                // check the userProfile is null
+                                                                                                                    // check the userProfile is null
                 if(userProfile != null){
-                    // set the username
-                    String user = userProfile.username;
+                    String user = userProfile.username;                                                             // set the username
                     usernameText.setText(user);
                     if (userProfile.imgUrl != null) {
-                        // set the image
-                        Glide.with(UserHome.this).load(userProfile.getImgUrl()).into(ProfileImg);
+                        Glide.with(UserHome.this).load(userProfile.getImgUrl()).into(ProfileImg);           // set the image
                     }
                 }
 
@@ -81,11 +71,7 @@ public class UserHome extends AppCompatActivity {
                 Toast.makeText(UserHome.this,"Database error", Toast.LENGTH_LONG).show();
             }
         });
-
-
-
-        // Bottom navigation code
-        // Start here
+                                                                                                                    // IM/2021/059 (Start - Bottom navigation code)
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.user);
 
@@ -111,8 +97,7 @@ public class UserHome extends AppCompatActivity {
                 return true;
             }
             return false;
-        });
-        // Ends here
+        });                                                                                                         // Ends here
     }
 
     public void AboutUs(View view) {
@@ -130,6 +115,4 @@ public class UserHome extends AppCompatActivity {
     public void GoToContactUs(View view) {
         startActivity(new Intent(this, ContactUs.class));
     }
-
-    // IM/2021/082 (end)
-}
+}                                                                                                                   // IM/2021/082 (end)
