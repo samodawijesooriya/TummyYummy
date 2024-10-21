@@ -1,6 +1,6 @@
 # Tummy Yummy - Taste It Your Way
 
-Welcome to **Tummy Yummy**, a mobile recipe-sharing app where food enthusiasts can discover, create, and share recipes. Whether you're searching for your next meal idea or uploading your own culinary creation, Tummy Yummy offers an intuitive and user-friendly experience. This repository contains the source code for the Tummy Yummy mobile application, built using **Android Studio** for the frontend, **PHP** for backend services, and **PHP MyAdmin** for database management.
+Welcome to **Tummy Yummy**, a recipe-sharing Android app that makes cooking simple and fun! Developed using **Android Studio** and **Java**, this app allows users to explore, share, and manage their favorite recipes, all powered by Firebase Authentication, Firebase Realtime Database, and Firebase Storage.
 
 ## Features
 
@@ -16,10 +16,16 @@ Welcome to **Tummy Yummy**, a mobile recipe-sharing app where food enthusiasts c
 
 ## Technologies Used
 
-- **Frontend**: Android Studio (Java, XML)
-- **Backend**: PHP (Server-side scripting)
-- **Database**: MySQL, managed through PHP MyAdmin
-- **Version Control**: GitHub
+-- **Android Studio**
+Android Studio is the official IDE for Android development, providing a powerful code editor, debugging tools, and a robust emulator. We used Android Studio to build, test, and run our app on Android devices.
+-- **Java**
+Java is a popular, object-oriented programming language used to develop Android applications. We used Java for the core functionality of the app, such as handling user authentication, managing recipe data, and building user interfaces.
+-- **Firebase Authentication**
+Firebase Authentication allows users to sign up and log in using their email and password. It handles the entire authentication flow securely, including features like password reset and email verification.
+-- **Firebase Realtime Database**
+The Firebase Realtime Database is a NoSQL cloud database that stores and syncs data between users in real-time. We used it to store user recipes, categories, favorites, and other app data, making sure the app is always up-to-date for every user.
+-- **Firebase Storage**
+Firebase Storage is used to store and serve user-generated content, such as images. In our app, we used it to upload and store recipe photos securely, ensuring that they are accessible anytime by users when browsing or adding recipes.
 
 ## Installation
 
